@@ -12,13 +12,14 @@
     <meta property="og:description" content="Menyediakan Berbagai Kebutuhan File FreeFire!!">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://api.nekolabs.web.id/f/image-1.jpg">
+    
     <style>
         /* --- BAGIAN CSS (TAMPILAN) --- */
         :root {
             --bg-color: #0f0f13;
             --card-bg: #1a1a24;
-            --primary-neon: #00ffcc; /* Warna Neon Utama (Cyan) */
-            --secondary-neon: #ff0055; /* Warna Neon Kedua (Merah Pink) */
+            --primary-neon: #00ffcc;
+            --secondary-neon: #ff0055;
             --text-color: #ffffff;
             --text-secondary: #b3b3b3;
         }
@@ -51,14 +52,12 @@
             letter-spacing: 2px;
             margin: 0;
             text-shadow: 0 0 10px var(--primary-neon);
-            /* FIX: Agar Logo dan Teks Rata Tengah */
             display: flex;
             align-items: center;
             justify-content: center;
             line-height: 1.2;
         }
 
-        /* --- CSS Logo Header yang Diperbaiki --- */
         .header-logo {
             width: 40px; 
             height: 40px; 
@@ -66,7 +65,6 @@
             filter: drop-shadow(0 0 8px var(--primary-neon));
             border-radius: 50%;
         }
-        /* ------------------------------------------- */
 
         header .sub-title {
             color: var(--primary-neon);
@@ -98,7 +96,6 @@
             top: 0; left: 0; width: 4px; height: 100%;
         }
 
-        /* Warna Garis Pinggir Tiap Kategori */
         .card.hologram::before { background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
         .card.cacheres::before { background: #ff2a2a; box-shadow: 0 0 10px #ff2a2a; }
         .card.jasa::before { background: #ae00ff; box-shadow: 0 0 10px #ae00ff; }
@@ -123,18 +120,24 @@
         }
 
         li {
-            padding: 10px 0; 
+            padding: 12px 10px; 
             border-bottom: 1px solid #2a2a35;
             display: flex; 
             align-items: center;
             font-size: 14px;
+            cursor: pointer; 
+            transition: background 0.2s;
+            border-radius: 5px;
+        }
+
+        li:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
 
         li:last-child {
             border-bottom: none;
         }
         
-        /* Nama Produk dan Icon */
         .product-name {
             display: flex;
             align-items: center;
@@ -147,7 +150,6 @@
             font-size: 12px;
         }
         
-        /* Harga Produk */
         .product-price {
             margin-left: auto;
             font-family: 'Orbitron', sans-serif;
@@ -157,7 +159,6 @@
             padding-left: 10px; 
             text-shadow: 0 0 5px rgba(255, 0, 85, 0.5); 
         }
-
 
         .footer-note {
             font-size: 12px;
@@ -169,7 +170,6 @@
             border-radius: 6px;
         }
 
-        /* Box Catatan Penting */
         .note-box {
             background: linear-gradient(45deg, #1a1a24, #252530);
             border: 1px dashed var(--primary-neon);
@@ -186,7 +186,6 @@
             margin-bottom: 5px;
         }
 
-        /* Tombol */
         .btn {
             display: flex;
             justify-content: center;
@@ -226,7 +225,6 @@
             background: rgba(0, 255, 204, 0.05);
         }
 
-        /* Footer Copyright */
         .credit {
             text-align: center;
             font-size: 12px;
@@ -234,6 +232,76 @@
             margin-top: 20px;
         }
 
+        /* --- CSS UNTUK POPUP / MODAL --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.85); 
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-neon);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-header {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-neon);
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #444;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background: var(--secondary-neon);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .click-hint {
+            font-size: 10px; 
+            color: #666; 
+            margin-left: 5px; 
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -247,26 +315,29 @@
             </h1>
             <div class="sub-title"> EWAA XDEV PROJECT V1</div>
         </header>
+
         <section class="card hologram">
             <div class="card-title">
                 <i class="fas fa-folder-open"></i> FILE HOLOGRAM <span style="font-size: 12px; opacity: 0.7; margin-left:auto">[NO ROOT]</span>
             </div>
             <ul>
-                <li>
-                    <span class="product-name"><i class="fas fa-crosshairs"></i> Holo Senjata</span>
+                <li onclick="openPreview('Holo Senjata', 'https://api.nekolabs.web.id/f/holo.jpg')">
+                    <span class="product-name"><i class="fas fa-crosshairs"></i> Holo Senjata <span class="click-hint">(Lihat)</span></span>
                     <span class="product-price">10K</span>
                 </li>
-                <li>
+
+                <li onclick="openPreview('Holo Bundle', 'https://api.nekolabs.web.id/f/holo2.jpg')">
                     <span class="product-name"><i class="fas fa-tshirt"></i> Holo Bundle</span>
                     <span class="product-price">10K</span>
                 </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-user-ninja"></i> Holo Karakter</span>
+
+                <li onclick="openPreview('Holo Karakter (Support Smooth)', 'https://api.nekolabs.web.id/f/holo3.jpg')">
+                    <span class="product-name"><i class="fas fa-user-ninja"></i> Holo Char/WP/BD</span>
                     <span class="product-price">35K</span>
                 </li>
             </ul>
             <div class="footer-note">
-                <i class="fas fa-info-circle"></i> Free Req Warna. Use PC (UABE/ASTU)
+                <i class="fas fa-info-circle"></i> Klik menu di atas untuk lihat contoh gambar.
             </div>
         </section>
 
@@ -328,7 +399,7 @@
                 </li>
             </ul>
             <div class="footer-note">
-                <i class="fas fa-check-circle"></i> Free Add Credits in Dump. Use PC (UABE/ASTU).
+                <i class="fas fa-check-circle"></i> Use PC (UABE/ASTU).
             </div>
         </section>
 
@@ -356,5 +427,32 @@
         </div>
 
     </div>
+
+    <div id="previewModal" class="modal" onclick="closePreview(event)">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle">NAMA FITUR</div>
+            <img id="modalImg" src="" alt="Preview" class="modal-img">
+            <button class="close-btn" onclick="closePreviewBtn()">TUTUP</button>
+        </div>
+    </div>
+
+    <script>
+        function openPreview(title, imgSrc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalImg').src = imgSrc;
+            document.getElementById('previewModal').style.display = 'flex';
+        }
+
+        function closePreviewBtn() {
+            document.getElementById('previewModal').style.display = 'none';
+        }
+
+        function closePreview(event) {
+            if (event.target == document.getElementById('previewModal')) {
+                document.getElementById('previewModal').style.display = 'none';
+            }
+        }
+    </script>
+
 </body>
 </html>
