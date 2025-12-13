@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+titleYBERYBER!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"href  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XDEV PROJECT</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <meta property="og:title" content="EWAA XDEV PROJECT">
@@ -14,22 +13,23 @@
     <meta property="og:image" content="https://image2url.com/images/1765305800938-9e425421-cbc0-4000-afff-0ca024daf168.png">
     
     <style>
-        /* --- BAGIAN CSS (TAMPILAN) --- */
+        /* --- TEMA IM-GUI CYBERPUNK --- */
         :root {
-            --bg-color: #0f0f13;
-            --card-bg: #1a1a24;
-            --primary-neon: #00ffcc;
-            --secondary-neon: #ff0055;
-            --text-color: #ffffff;
-            --text-secondary: #b3b3b3;
+            --bg-color: #111116; /* Dark background */
+            --primary-color: #00ffcc; /* Neon Cyan (Primary IM-GUI Highlight) */
+            --secondary-color: #ff0077; /* Neon Magenta (Accent/Danger) */
+            --frame-bg: #1f1f26; /* Panel/Card background */
+            --border-color: #333340; /* Subtle border */
+            --text-color: #eeeeee;
+            --mono-font: 'Roboto Mono', monospace; /* IM-GUI Font */
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--mono-font);
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             justify-content: center;
         }
@@ -37,82 +37,78 @@
         .container {
             max-width: 480px; 
             width: 100%;
+            padding: 10px;
         }
 
-        /* Header */
+        /* Header (Top Frame) */
         header {
             text-align: center;
-            margin-bottom: 30px;
-            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 25px;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 255, 204, 0.1);
         }
         
         header h1 {
-            font-size: 24px;
+            font-size: 20px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin: 0;
-            text-shadow: 0 0 10px var(--primary-neon);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1.2;
+            color: var(--primary-color);
+            text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
         }
 
         .header-logo {
-            width: 40px; 
-            height: 40px; 
-            margin-right: 10px;
-            filter: drop-shadow(0 0 8px var(--primary-neon));
-            border-radius: 50%;
+            display: none; /* Menyembunyikan logo agar lebih minimalis */
         }
 
         header .sub-title {
-            color: var(--primary-neon);
-            font-size: 14px;
+            color: var(--text-color);
+            font-size: 12px;
             margin-top: 5px;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
-        /* Kartu Produk */
+        /* Card (IM-GUI Window Frame) */
         .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: transform 0.2s;
+            background: var(--frame-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+            transition: border-color 0.3s, box-shadow 0.3s;
             position: relative;
-            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary-neon);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
         }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-        }
-
-        .card.hologram::before { background: #00e5ff; box-shadow: 0 0 10px #00e5ff; }
-        .card.cacheres::before { background: #ff2a2a; box-shadow: 0 0 10px #ff2a2a; }
-        .card.jasa::before { background: #ae00ff; box-shadow: 0 0 10px #ae00ff; }
 
         .card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 18px;
-            margin-bottom: 15px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--border-color);
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 10px;
+        }
+        
+        /* Warna untuk setiap kategori */
+        .hologram .card-title { color: #00e5ff; border-bottom-color: #00e5ff55; }
+        .cacheres .card-title { color: #ff2a2a; border-bottom-color: #ff2a2a55; }
+        .jasa .card-title { color: #ae00ff; border-bottom-color: #ae00ff55; }
+
+        .card-title i {
+            margin-right: 8px;
+            font-size: 16px;
         }
 
-        .hologram .card-title { color: #00e5ff; }
-        .cacheres .card-title { color: #ff2a2a; }
-        .jasa .card-title { color: #ae00ff; }
-
+        /* List Item (IM-GUI Button/Selectable) */
         ul {
             list-style: none;
             padding: 0;
@@ -120,22 +116,19 @@
         }
 
         li {
-            padding: 12px 10px; 
-            border-bottom: 1px solid #2a2a35;
+            padding: 8px 5px; 
+            border: 1px solid transparent; 
+            margin-bottom: 3px;
             display: flex; 
             align-items: center;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer; 
-            transition: background 0.2s;
-            border-radius: 5px;
+            transition: background 0.1s, border-color 0.1s;
         }
 
         li:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        li:last-child {
-            border-bottom: none;
+            background: rgba(0, 255, 204, 0.1); 
+            border-color: var(--primary-color);
         }
         
         .product-name {
@@ -145,94 +138,114 @@
         }
 
         .product-name i {
-            margin-right: 10px;
-            color: var(--text-secondary);
-            font-size: 12px;
+            margin-right: 8px;
+            color: var(--primary-color);
+            font-size: 10px;
+            opacity: 0.7;
         }
         
         .product-price {
             margin-left: auto;
-            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            color: var(--secondary-neon); 
-            font-size: 15px;
+            color: var(--secondary-color); 
+            font-size: 13px;
             padding-left: 10px; 
-            text-shadow: 0 0 5px rgba(255, 0, 85, 0.5); 
+            text-shadow: 0 0 5px rgba(255, 0, 119, 0.4); 
         }
 
         .footer-note {
-            font-size: 12px;
-            color: var(--text-secondary);
+            font-size: 10px;
+            color: #888;
             margin-top: 10px;
-            font-style: italic;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px;
-            border-radius: 6px;
+            padding-top: 5px;
+            border-top: 1px dashed var(--border-color);
+            opacity: 0.7;
         }
 
+        /* Note Box (IM-GUI Info Panel) */
         .note-box {
-            background: linear-gradient(45deg, #1a1a24, #252530);
-            border: 1px dashed var(--primary-neon);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            line-height: 1.6;
+            background: #15151a;
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 1.5;
         }
         
         .note-box strong {
-            color: var(--primary-neon);
+            color: var(--primary-color);
             display: block;
             margin-bottom: 5px;
+            text-transform: uppercase;
         }
+        
+        .note-box br { display: none; } /* Hilangkan break agar lebih rapat */
+        .note-box p { margin: 0; padding: 0; }
+        .note-box p::before { content: '• '; color: var(--secondary-color); }
+        .note-box .fa-gift { font-size: 14px; margin-right: 5px; }
 
+        /* Button (IM-GUI Clickable) */
         .btn {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
-            padding: 15px;
-            border-radius: 50px;
+            padding: 12px;
+            border-radius: 0; /* Square look for IM-GUI */
             text-decoration: none;
-            font-weight: bold;
-            font-family: 'Orbitron', sans-serif;
-            margin-bottom: 15px;
+            font-weight: 700;
+            font-family: var(--mono-font);
+            margin-bottom: 10px;
             transition: 0.3s;
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-wa {
-            background: linear-gradient(90deg, #25D366, #128C7E);
-            color: white;
-            box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+            background: var(--primary-color);
+            color: var(--bg-color);
+            border: 1px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
         }
         
         .btn-wa:hover {
-            box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
-            transform: scale(1.02);
+            background: var(--bg-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+            transform: scale(1.01);
         }
 
         .btn-channel {
             background: transparent;
-            border: 2px solid #555;
-            color: #ddd;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
         }
 
         .btn-channel:hover {
-            border-color: var(--primary-neon);
-            color: var(--primary-neon);
-            background: rgba(0, 255, 204, 0.05);
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            background: rgba(255, 0, 119, 0.05);
         }
 
         .credit {
             text-align: center;
-            font-size: 12px;
-            color: #555;
-            margin-top: 20px;
+            font-size: 10px;
+            color: #444;
+            margin-top: 15px;
+        }
+        
+        .click-hint {
+            font-size: 9px; 
+            color: #888; 
+            margin-left: 5px; 
+            font-style: italic;
+            opacity: 0.6;
         }
 
-        /* --- CSS UNTUK POPUP / MODAL --- */
+        /* --- CSS UNTUK POPUP / MODAL (Log Window) --- */
         .modal {
             display: none; 
             position: fixed; 
@@ -241,20 +254,19 @@
             top: 0;
             width: 100%; 
             height: 100%; 
-            background-color: rgba(0,0,0,0.85); 
-            backdrop-filter: blur(5px);
+            background-color: rgba(0,0,0,0.95); 
+            backdrop-filter: blur(2px);
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.3s;
         }
 
         .modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--primary-neon);
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+            background: #000000;
+            border: 2px solid var(--secondary-color);
+            box-shadow: 0 0 20px rgba(255, 0, 119, 0.5);
             margin: auto;
-            padding: 20px;
-            border-radius: 15px;
+            padding: 15px;
             width: 90%;
             max-width: 400px;
             text-align: center;
@@ -262,45 +274,47 @@
         }
 
         .modal-header {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--primary-neon);
-            font-size: 18px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #333;
+            font-family: var(--mono-font);
+            color: var(--secondary-color);
+            font-size: 14px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--secondary-color);
+            text-transform: uppercase;
         }
 
         .modal-img {
             width: 100%;
             max-height: 300px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 1px solid #444;
-            margin-bottom: 15px;
+            object-fit: contain;
+            border: 1px solid var(--border-color);
+            margin-bottom: 10px;
         }
 
         .close-btn {
-            background: var(--secondary-neon);
-            color: white;
+            background: var(--primary-color);
+            color: var(--bg-color);
             border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
+            padding: 8px 15px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
+            font-family: var(--mono-font);
+            font-weight: 700;
             width: 100%;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        
+        .close-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
         }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-
-        .click-hint {
-            font-size: 10px; 
-            color: #666; 
-            margin-left: 5px; 
-            font-style: italic;
         }
     </style>
 </head>
@@ -309,57 +323,54 @@
     <div class="container">
         
         <header>
-            <h1>
-                <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" class="header-logo" alt="Logo">
-                List Harga File/Jasa☄️
-            </h1>
-            <div class="sub-title"> EWAA XDEV PROJECT V1</div>
+            <h1>[XDEV PROJECT V1]</h1>
+            <div class="sub-title">/// PRICE LIST (FF MOD FILE)</div>
         </header>
-
+        
         <section class="card hologram">
             <div class="card-title">
-                <i class="fas fa-folder-open"></i> FILE HOLOGRAM <span style="font-size: 12px; opacity: 0.7; margin-left:auto">[NO ROOT]</span>
+                <i class="fas fa-folder-open"></i> FILE HOLOGRAM <span style="font-size: 10px; opacity: 0.7; margin-left:auto">[NO ROOT]</span>
             </div>
             <ul>
-                <li onclick="openPreview('Holo Senjata', 'https://image2url.com/images/1765306184836-d23afa5a-461e-4f45-97b9-6f4ee917f33f.jpg')">
-                    <span class="product-name"><i class="fas fa-crosshairs"></i> Holo Senjata <span class="click-hint">(Lihat)</span></span>
+                <li onclick="openPreview('HOLO SENJATA', 'https://image2url.com/images/1765306184836-d23afa5a-461e-4f45-97b9-6f4ee917f33f.jpg')">
+                    <span class="product-name"><i class="fas fa-crosshairs"></i> Holo Senjata <span class="click-hint">| PREVIEW</span></span>
                     <span class="product-price">10K</span>
                 </li>
 
-                <li onclick="openPreview('Holo Bundle', 'https://image2url.com/images/1765306277952-d029adf2-ceb8-4074-a504-822d092e7022.jpg')">
-                    <span class="product-name"><i class="fas fa-tshirt"></i> Holo Bundle <span class="click-hint">(Lihat)</span></span>
+                <li onclick="openPreview('HOLO BUNDLE', 'https://image2url.com/images/1765306277952-d029adf2-ceb8-4074-a504-822d092e7022.jpg')">
+                    <span class="product-name"><i class="fas fa-tshirt"></i> Holo Bundle <span class="click-hint">| PREVIEW</span></span>
                     <span class="product-price">10K</span>
                 </li>
 
-                <li onclick="openPreview('Holo Karakter (Support Smooth)', 'https://image2url.com/images/1765306340816-c7840cd2-b9fc-494b-b89a-aa11757b5227.jpg')">
-                    <span class="product-name"><i class="fas fa-user-ninja"></i> Holo Karakter <span class="click-hint">(Lihat)</span></span>
+                <li onclick="openPreview('HOLO KARAKTER (SMOOTH SUPPORT)', 'https://image2url.com/images/1765306340816-c7840cd2-b9fc-494b-b89a-aa11757b5227.jpg')">
+                    <span class="product-name"><i class="fas fa-user-ninja"></i> Holo Karakter <span class="click-hint">| PREVIEW</span></span>
                     <span class="product-price">35K</span>
                 </li>
             </ul>
             <div class="footer-note">
-                <i class="fas fa-info-circle"></i> Klik menu di atas untuk lihat contoh gambar.
+                > *STATUS: READY. Klik item untuk melihat contoh tampilan.
             </div>
         </section>
 
         <section class="card cacheres">
             <div class="card-title">
-                <i class="fas fa-cogs"></i> FILE CACHERES <span style="font-size: 12px; opacity: 0.7; margin-left:auto">[ROOT]</span>
+                <i class="fas fa-cogs"></i> FILE CACHERES <span style="font-size: 10px; opacity: 0.7; margin-left:auto">[ROOT ONLY]</span>
             </div>
             <ul>
                 <li>
-                    <span class="product-name"><i class="fas fa-skull"></i> Drag HS 100%</span>
+                    <span class="product-name"><i class="fas fa-skull"></i> Drag **Headshot** 100%</span>
                     <span class="product-price">40K</span>
                 </li>
                 <li>
-                    <span class="product-name"><i class="fas fa-bullseye"></i> Leher HS</span>
+                    <span class="product-name"><i class="fas fa-bullseye"></i> Leher **Headshot**</span>
                     <span class="product-price">40K</span>
                 </li>
                 <li>
-                    <span class="product-name"><i class="fas fa-heart"></i> Dada HS</span>
+                    <span class="product-name"><i class="fas fa-heart"></i> Dada **Headshot**</span>
                     <span class="product-price">40K</span>
                 </li>
                 <li>
-                    <span class="product-name"><i class="fas fa-child"></i> Badan HS</span>
+                    <span class="product-name"><i class="fas fa-child"></i> Badan **Headshot**</span>
                     <span class="product-price">40K</span>
                 </li>
                 <li>
@@ -368,13 +379,13 @@
                 </li>
             </ul>
             <div class="footer-note">
-                <i class="fas fa-video"></i> With Showcase in Tools. Free Req Value.
+                > *INFO: With Showcase in Tools. Free Req Value.
             </div>
         </section>
 
         <section class="card jasa">
             <div class="card-title">
-                <i class="fas fa-desktop"></i> OPEN JASA <span style="font-size: 12px; opacity: 0.7; margin-left:auto">[ALL DEVICE]</span>
+                <i class="fas fa-desktop"></i> OPEN JASA MODIF <span style="font-size: 10px; opacity: 0.7; margin-left:auto">[ALL DEVICE]</span>
             </div>
             <ul>
                 <li>
@@ -399,40 +410,40 @@
                 </li>
             </ul>
             <div class="footer-note">
-                <i class="fas fa-check-circle"></i> Use PC (UABE/ASTU).
+                > *NOTE: Use PC (UABE/ASTU) Required.
             </div>
         </section>
 
         <div class="note-box">
-            <strong><i class="fas fa-gift"></i> BONUS PEMBELIAN:</strong>
-            • Free Akses Permanen <br>
-            • Update FF di kasih Holo New <br>
-            • Gratis Update buat Member <br>
-            • Free Tutor Carpas <br>
-            • Free Join GB Private 🥷
+            <strong><i class="fas fa-gift"></i> [LOG] BONUS PEMBELIAN:</strong>
+            <p>Free Akses Permanen</p>
+            <p>Update FF di kasih Holo New</p>
+            <p>Gratis Update buat Member</p>
+            <p>Free Tutor Carpas</p>
+            <p>Free Join GB Private 🥷</p>
         </div>
 
         <a href="https://wa.me/6289653880942?text=Halo%20bang,%20mau%20order%20file%20FF" class="btn btn-wa">
-            <i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 18px;"></i>
-            BUY NOW / PM @EWAA
+            <i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 16px;"></i>
+            [EXECUTING ORDER] BUY NOW / PM @EWAA
         </a>
 
         <a href="https://whatsapp.com/channel/0029VbCI34V2ZjCpOdI5Hc0e" class="btn btn-channel">
             <i class="fas fa-rss" style="margin-right: 10px;"></i>
-            JOIN SALURAN UPDATE
+            [DATA STREAM] JOIN SALURAN UPDATE
         </a>
 
         <div class="credit">
-            &copy; 2024 Ewaa Store. All Rights Reserved.
+            > PROCESS COMPLETE: &copy; 2024 Ewaa Store. All Rights Reserved.
         </div>
 
     </div>
-
+    
     <div id="previewModal" class="modal" onclick="closePreview(event)">
         <div class="modal-content">
-            <div class="modal-header" id="modalTitle">NAMA FITUR</div>
+            <div class="modal-header" id="modalTitle">[FEATURE PREVIEW]</div>
             <img id="modalImg" src="" alt="Preview" class="modal-img">
-            <button class="close-btn" onclick="closePreviewBtn()">TUTUP</button>
+            <button class="close-btn" onclick="closePreviewBtn()">[CLOSE]</button>
         </div>
     </div>
 
