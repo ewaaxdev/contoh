@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XDEV PROJECT</title>
+    <title>XDEV PROJECT - IM-GUI CYBER</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -44,7 +44,7 @@
         /* Header (Top Frame) */
         header {
             text-align: center;
-            margin-bottom: 15px; /* Kurangi margin untuk memberi ruang gambar */
+            margin-bottom: 15px; 
             padding: 10px 0;
             border-bottom: 2px solid var(--primary-color);
             box-shadow: 0 4px 10px rgba(0, 255, 204, 0.1);
@@ -60,7 +60,7 @@
         }
 
         .header-logo {
-            display: none; /* Menyembunyikan logo agar lebih minimalis */
+            display: none; 
         }
 
         header .sub-title {
@@ -71,19 +71,19 @@
             opacity: 0.8;
         }
         
-        /* --- CSS BARU UNTUK CIRCLE IMAGE --- */
+        /* --- CSS CIRCLE IMAGE --- */
         .profile-circle {
             text-align: center;
-            margin-bottom: 25px; /* Memberi jarak ke kartu pertama */
+            margin-bottom: 25px; 
         }
         
         .profile-circle img {
-            width: 80px; /* Ukuran yang pas untuk mobile */
+            width: 80px; 
             height: 80px;
-            border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+            border-radius: 50%; 
             border: 3px solid var(--primary-color);
             object-fit: cover;
-            box-shadow: 0 0 15px var(--primary-color), inset 0 0 10px rgba(0, 255, 204, 0.5); /* Efek neon glow */
+            box-shadow: 0 0 15px var(--primary-color), inset 0 0 10px rgba(0, 255, 204, 0.5); 
             transition: transform 0.3s;
         }
         
@@ -91,6 +91,8 @@
             transform: scale(1.05);
             box-shadow: 0 0 20px var(--primary-color), inset 0 0 15px rgba(0, 255, 204, 0.7);
         }
+        /* --- END CIRCLE IMAGE --- */
+
 
         /* Card (IM-GUI Window Frame) */
         .card {
@@ -202,7 +204,6 @@
             text-transform: uppercase;
         }
         
-        .note-box br { display: none; } /* Hilangkan break agar lebih rapat */
         .note-box p { margin: 0; padding: 0; }
         .note-box p::before { content: '• '; color: var(--secondary-color); }
         .note-box .fa-gift { font-size: 14px; margin-right: 5px; }
