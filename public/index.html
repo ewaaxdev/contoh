@@ -3,469 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XDEV PROJECT - IM-GUI CYBER</title>
+    <title>XDEV PROJECT - IMGUI LOADER</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <meta property="og:title" content="EWAA XDEV PROJECT">
-    <meta property="og:description" content="Menyediakan Berbagai Kebutuhan File FreeFire!!">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://image2url.com/images/1765305800938-9e425421-cbc0-4000-afff-0ca024daf168.png">
-    
     <style>
-        /* --- TEMA IM-GUI CYBERPUNK --- */
         :root {
-            --bg-color: #111116; /* Dark background */
-            --primary-color: #00ffcc; /* Neon Cyan (Primary IM-GUI Highlight) */
-            --secondary-color: #ff0077; /* Neon Magenta (Accent/Danger) */
-            --frame-bg: #1f1f26; /* Panel/Card background */
-            --border-color: #333340; /* Subtle border */
-            --text-color: #eeeeee;
-            --mono-font: 'Roboto Mono', monospace; /* IM-GUI Font */
+            /* ImGui Color Palette */
+            --bg-body: #0f0f0f;
+            --bg-panel: #141414;
+            --bg-element: #1e1e1e;
+            --bg-hover: #252525;
+            --accent-main: #3b82f6; /* ImGui Blue */
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --text-primary: #e0e0e0;
+            --text-secondary: #9ca3af;
+            --border-color: #333;
+            --font-stack: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none; /* Agar terasa seperti aplikasi native */
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--mono-font);
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-family: var(--font-stack);
             margin: 0;
-            padding: 10px;
+            padding: 15px;
             display: flex;
             justify-content: center;
+            min-height: 100vh;
+            /* Grid background halus */
+            background-image: linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
-        .container {
-            max-width: 480px; 
+        .loader-window {
             width: 100%;
-            padding: 10px;
-        }
-
-        /* Header (Top Frame) */
-        header {
-            text-align: center;
-            margin-bottom: 15px; 
-            padding: 10px 0;
-            border-bottom: 2px solid var(--primary-color);
-            box-shadow: 0 4px 10px rgba(0, 255, 204, 0.1);
-        }
-        
-        header h1 {
-            font-size: 20px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin: 0;
-            color: var(--primary-color);
-            text-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
-        }
-
-        .header-logo {
-            display: none; 
-        }
-
-        header .sub-title {
-            color: var(--text-color);
-            font-size: 12px;
-            margin-top: 5px;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
-        
-        /* --- CSS CIRCLE IMAGE --- */
-        .profile-circle {
-            text-align: center;
-            margin-bottom: 25px; 
-        }
-        
-        .profile-circle img {
-            width: 80px; 
-            height: 80px;
-            border-radius: 50%; 
-            border: 3px solid var(--primary-color);
-            object-fit: cover;
-            box-shadow: 0 0 15px var(--primary-color), inset 0 0 10px rgba(0, 255, 204, 0.5); 
-            transition: transform 0.3s;
-        }
-        
-        .profile-circle img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px var(--primary-color), inset 0 0 15px rgba(0, 255, 204, 0.7);
-        }
-        /* --- END CIRCLE IMAGE --- */
-
-
-        /* Card (IM-GUI Window Frame) */
-        .card {
-            background: var(--frame-bg);
+            max-width: 460px;
+            background: var(--bg-panel);
             border: 1px solid var(--border-color);
-            padding: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.4);
-            transition: border-color 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--accent-main);
+            box-shadow: 0 0 20px rgba(0,0,0,0.7);
             position: relative;
-        }
-
-        .card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
-        }
-
-        .card-title {
-            font-size: 14px;
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px dashed var(--border-color);
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
             display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER --- */
+        .window-header {
+            background: #1a1a1a;
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
-        
-        /* Warna untuk setiap kategori */
-        .hologram .card-title { color: #00e5ff; border-bottom-color: #00e5ff55; }
-        .cacheres .card-title { color: #ff2a2a; border-bottom-color: #ff2a2a55; }
-        .jasa .card-title { color: #ae00ff; border-bottom-color: #ae00ff55; }
 
-        .card-title i {
-            margin-right: 8px;
-            font-size: 16px;
+        .app-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: var(--accent-main);
+            letter-spacing: 1px;
+        }
+        
+        .app-version {
+            font-size: 10px;
+            color: var(--text-secondary);
+            background: #222;
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
-        /* List Item (IM-GUI Button/Selectable) */
-        ul {
+        /* --- USER PROFILE AREA --- */
+        .profile-area {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.05) 0%, rgba(0,0,0,0) 100%);
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            border: 2px solid var(--accent-main);
+            margin-right: 15px;
+            object-fit: cover;
+        }
+
+        .profile-text h2 {
+            margin: 0;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .profile-text p {
+            margin: 4px 0 0;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        /* --- CONTENT SCROLL AREA --- */
+        .content-area {
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 70vh;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-main) var(--bg-element);
+        }
+
+        /* --- SECTION STYLING --- */
+        .menu-section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            color: var(--accent-main);
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 4px;
+        }
+        
+        .section-title i { margin-right: 6px; }
+        .section-badge { margin-left: auto; font-size: 9px; opacity: 0.7; color: #fff; background: #333; padding: 1px 4px; }
+
+        /* --- MENU ITEMS (THE COMPLEX LIST) --- */
+        .item-list {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        li {
-            padding: 8px 5px; 
-            border: 1px solid transparent; 
-            margin-bottom: 3px;
-            display: flex; 
+        .item-row {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
+            background: var(--bg-element);
+            margin-bottom: 4px;
+            padding: 8px 10px;
             font-size: 12px;
-            cursor: pointer; 
-            transition: background 0.1s, border-color 0.1s;
+            border-left: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
         }
 
-        li:hover {
-            background: rgba(0, 255, 204, 0.1); 
-            border-color: var(--primary-color);
+        /* EFEK FLOATING & HOVER */
+        .item-row:hover {
+            background: var(--bg-hover);
+            border-left: 2px solid var(--accent-main);
+            transform: translateX(6px); /* Ini efek float-nya */
+            box-shadow: -5px 0 10px rgba(0,0,0,0.3);
+            color: #fff;
         }
-        
-        .product-name {
+
+        .item-left {
             display: flex;
             align-items: center;
-            flex-grow: 1; 
+            gap: 10px;
         }
 
-        .product-name i {
-            margin-right: 8px;
-            color: var(--primary-color);
-            font-size: 10px;
-            opacity: 0.7;
+        /* Fake Checkbox untuk kesan Menu Cheat */
+        .fake-checkbox {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #555;
+            background: #111;
+            display: inline-block;
         }
         
-        .product-price {
-            margin-left: auto;
-            font-weight: 700;
-            color: vabukandary-color); 
-            font-size: 13px;
-            padding-left: 10px; 
-            text-shadow: 0 0 5px rgba(255, 0, 119, 0.4); 
+        .item-row:hover .fake-checkbox {
+            background: var(--accent-main);
+            border-color: var(--accent-main);
         }
 
-        .footer-note {
-            font-size: 10px;
-            color: #888;
-            margin-top: 10px;
-            padding-top: 5px;
-            border-top: 1px dashed var(--border-color);
-            opacity: 0.7;
-        }
-
-        /* Note Box (IM-GUI Info Panel) */
-        .note-box {
-            background: #15151a;
-            border: 1px solid var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
-            padding: 12px;
-            margin-bottom: 20px;
+        .item-price {
+            font-weight: bold;
+            color: var(--accent-main);
             font-size: 12px;
-            line-height: 1.5;
-        }
-        
-        .note-box strong {
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-        
-        .note-box p { margin: 0; padding: 0; }
-        .note-box p::before { content: '• '; color: var(--secondary-color); }
-        .note-box .fa-gift { font-size: 14px; margin-right: 5px; }
-
-        /* Button (IM-GUI Clickable) */
-        .btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 12px;
-            border-radius: 0; /* Square look for IM-GUI */
-            text-decoration: none;
-            font-weight: 700;
-            font-family: var(--mono-font);
-            margin-bottom: 10px;
-            transition: 0.3s;
-            box-sizing: border-box;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        .btn-wa {
-            background: var(--primary-color);
-            color: var(--bg-color);
-            border: 1px solid var(--primary-color);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
-        }
-        
-        .btn-wa:hover {
-            background: var(--bg-color);
-            color: var(--primary-color);
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
-            transform: scale(1.01);
-        }
-
-        .btn-channel {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .btn-channel:hover {
-            border-color: var(--secondary-color);
-            color: var(--secondary-color);
-            background: rgba(255, 0, 119, 0.05);
-        }
-
-        .credit {
-            text-align: center;
-            font-size: 10px;
-            color: #444;
-            margin-top: 15px;
-        }
-        
-        .click-hint {
-            font-size: 9px; 
-            color: #888; 
-            margin-left: 5px; 
+        .preview-tag {
+            font-size: 9px;
+            color: #666;
+            margin-left: 5px;
             font-style: italic;
-            opacity: 0.6;
+        }
+        .item-row:hover .preview-tag { color: #999; }
+
+        .footer-info {
+            font-size: 10px;
+            color: #555;
+            margin-top: 5px;
+            padding-left: 5px;
+            font-style: italic;
         }
 
-        /* --- CSS UNTUK POPUP / MODAL (Log Window) --- */
+        /* --- CONSOLE LOG BOX (Pengganti Note Box Lama) --- */
+        .console-box {
+            background: #000;
+            border: 1px solid #333;
+            padding: 10px;
+            margin-bottom: 15px;
+            height: 140px;
+            overflow-y: auto;
+            font-family: 'Consolas', monospace;
+            font-size: 10px;
+        }
+
+        .log-entry { margin-bottom: 3px; display: block; color: #888; }
+        .log-entry.highlight { color: #fff; }
+        .log-entry::before { content: "> "; color: var(--accent-main); }
+        .timestamp { color: var(--accent-main); margin-right: 5px; }
+
+        /* --- BUTTONS --- */
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-main {
+            background: var(--accent-main);
+            color: #000;
+        }
+        .btn-main:hover {
+            background: #5fa5f9;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .btn-sec {
+            background: transparent;
+            border: 1px solid #444;
+            color: var(--text-secondary);
+        }
+        .btn-sec:hover {
+            border-color: var(--accent-main);
+            color: var(--text-primary);
+        }
+
+        /* --- MODAL (TETAP SAMA) --- */
         .modal {
             display: none; 
             position: fixed; 
             z-index: 9999; 
-            left: 0;
-            top: 0;
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0,0,0,0.95); 
+            left: 0; top: 0;
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.85); 
             backdrop-filter: blur(2px);
             justify-content: center;
             align-items: center;
-            animation: fadeIn 0.3s;
         }
-
         .modal-content {
-            background: #000000;
-            border: 2px solid var(--secondary-color);
-            box-shadow: 0 0 20px rgba(255, 0, 119, 0.5);
-            margin: auto;
-            padding: 15px;
+            background: #111;
+            border: 1px solid var(--accent-main);
+            padding: 10px;
             width: 90%;
             max-width: 400px;
             text-align: center;
-            position: relative;
         }
-
         .modal-header {
-            font-family: var(--mono-font);
-            color: var(--secondary-color);
-            font-size: 14px;
+            color: var(--accent-main);
             margin-bottom: 10px;
+            border-bottom: 1px solid #333;
             padding-bottom: 5px;
-            border-bottom: 1px solid var(--secondary-color);
-            text-transform: uppercase;
         }
-
         .modal-img {
             width: 100%;
-            max-height: 300px;
-            object-fit: contain;
-            border: 1px solid var(--border-color);
-            margin-bottom: 10px;
+            border: 1px solid #333;
         }
-
         .close-btn {
-            background: var(--primary-color);
-            color: var(--bg-color);
-            border: none;
-            padding: 8px 15px;
-            cursor: pointer;
-            font-family: var(--mono-font);
-            font-weight: 700;
-            width: 100%;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
-        
-        .close-btn:hover {
-            background: var(--secondary-color);
+            background: #222;
             color: white;
-            box-shadow: 0 0 10px rgba(255, 0, 119, 0.5);
+            border: none;
+            padding: 8px;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            font-family: var(--font-stack);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        .close-btn:hover { background: #d32f2f; }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="loader-window">
         
-        <header>
-            <h1>[XDEV PROJECT V1]</h1>
-            <div class="sub-title">PRICE LIST (FREEFIRE FILE)</div>
-        </header>
-        
-        <div class="profile-circle">
-            <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" alt="Profile Logo">
-        </div>
-        
-        <section class="card hologram">
-            <div class="card-title">
-                <i class="fas fa-folder-open"></i> FILE HOLOGRAM <span style="font-size: 10px; opacity: 0.7; margin-left:auto">[NO ROOT]</span>
-            </div>
-            <ul>
-                <li onclick="openPreview('HOLO SENJATA', 'https://image2url.com/images/1765306184836-d23afa5a-461e-4f45-97b9-6f4ee917f33f.jpg')">
-                    <span class="product-name"><i class="fas fa-crosshairs"></i> Holo Senjata <span class="click-hint">| PREVIEW</span></span>
-                    <span class="product-price">15K</span>
-                </li>
-
-                <li onclick="openPreview('HOLO BUNDLE', 'https://image2url.com/images/1765306277952-d029adf2-ceb8-4074-a504-822d092e7022.jpg')">
-                    <span class="product-name"><i class="fas fa-tshirt"></i> Holo Bundle <span class="click-hint">| PREVIEW</span></span>
-                    <span class="product-price">15K</span>
-                </li>
-
-                <li onclick="openPreview('HOLO KARAKTER (SMOOTH SUPPORT)', 'https://image2url.com/images/1765306340816-c7840cd2-b9fc-494b-b89a-aa11757b5227.jpg')">
-                    <span class="product-name"><i class="fas fa-user-ninja"></i> Holo Karakter <span class="click-hint">| PREVIEW</span></span>
-                    <span class="product-price">35K</span>
-                </li>
-            </ul>
-            <div class="footer-note">
-                > STATUS: READY. Klik item untuk melihat contoh tampilan.
-            </div>
-        </section>
-
-        <section class="card cacheres">
-            <div class="card-title">
-                <i class="fas fa-cogs"></i> FILE CACHERES <span style="font-size: 10px; opacity: 0.7; margin-left:auto">[ROOT ONLY]</span>
-            </div>
-            <ul>
-                <li>
-                    <span class="product-name"><i class="fas fa-skull"></i> Drag Headshot 100%</span>
-                    <span class="product-price">40K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-bullseye"></i> Leher Headshot</span>
-                    <span class="product-price">40K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-heart"></i> Dada Headshot</span>
-                    <span class="product-price">40K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-child"></i> Badan Headshot</span>
-                    <span class="product-price">40K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-magic"></i> Magic Bullet</span>
-                    <span class="product-price">20K</span>
-                </li>
-            </ul>
-            <div class="footer-note">
-                > INFO: With Showcase in Tools. Free Req Value.
-            </div>
-        </section>
-
-        <section class="card jasa">
-            <div class="card-title">
-                <i class="fas fa-desktop"></i> OPEN JASA MODIF <span style="font-size: 10px; opacity: 0.7; margin-left:auto">[ALL DEVICE]</span>
-            </div>
-            <ul>
-                <li>
-                    <span class="product-name"><i class="fas fa-eraser"></i> Hapus Holo SS00</span>
-                    <span class="product-price">10K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-palette"></i> Add Color Holo</span>
-                    <span class="product-price">10K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-sync-alt"></i> Change Color Holo</span>
-                    <span class="product-price">5K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-image"></i> Add Gambar Glowal</span>
-                    <span class="product-price">5K</span>
-                </li>
-                <li>
-                    <span class="product-name"><i class="fas fa-paint-brush"></i> Change Color Glowal</span>
-                    <span class="product-price">5K</span>
-                </li>
-            </ul>
-            <div class="footer-note">
-                > INFO: Use PC (UABE/ASTU) Required.
-            </div>
-        </section>
-
-        <div class="note-box">
-            <strong><i class="fas fa-gift"></i> [LOG] INFO & BONUS PEMBELIAN:</strong>
-            <p>Free Akses Permanen</p>
-            <p>Update FF di kasih Holo New</p>
-            <p>Gratis Update buat Member</p>
-            <p>Free Tutor Carpas</p>
-            <p>Free Join GB Private 🥷</p>
-            <p>Admin hanya Menyediakan File</p>
-            <p>Tidak Menyediakan Virtual</p>
+        <div class="window-header">
+            <div class="app-title"><i class="fas fa-code"></i> XDEV PROJECT V1</div>
+            <div class="app-version">BUILD 2025.1</div>
         </div>
 
-        <a href="https://wa.me/6289653880942?text=Halo%20bang,%20mau%20order%20file%20FF" class="btn btn-wa">
-            <i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 16px;"></i>
-            [ORDER NOW] CHAT / PM @EWAA
-        </a>
-
-        <a href="https://whatsapp.com/channel/0029VbCI34V2ZjCpOdI5Hc0e" class="btn btn-channel">
-            <i class="fas fa-rss" style="margin-right: 10px;"></i>
-            [DATA STREAM] JOIN SALURAN UPDATE
-        </a>
-
-        <div class="credit">
-            @2025 Ewaa Store. All Rights Reserved.
+        <div class="profile-area">
+            <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" alt="Profile" class="profile-img">
+            <div class="profile-text">
+                <h2>EWAA STORE</h2>
+                <p>PRICE LIST (FREEFIRE FILE) | <span style="color:var(--accent-main)">CONNECTED</span></p>
+            </div>
         </div>
 
+        <div class="content-area">
+            
+            <div class="menu-section">
+                <div class="section-title">
+                    <i class="fas fa-folder"></i> [ESP] HOLOGRAM FILE
+                    <span class="section-badge">NO ROOT</span>
+                </div>
+                <ul class="item-list">
+                    <li class="item-row" onclick="openPreview('HOLO SENJATA', 'https://image2url.com/images/1765306184836-d23afa5a-461e-4f45-97b9-6f4ee917f33f.jpg')">
+                        <div class="item-left">
+                            <span class="fake-checkbox"></span>
+                            <span>Holo Senjata <span class="preview-tag">[PREVIEW]</span></span>
+                        </div>
+                        <span class="item-price">15K</span>
+                    </li>
+                    <li class="item-row" onclick="openPreview('HOLO BUNDLE', 'https://image2url.com/images/1765306277952-d029adf2-ceb8-4074-a504-822d092e7022.jpg')">
+                        <div class="item-left">
+                            <span class="fake-checkbox"></span>
+                            <span>Holo Bundle <span class="preview-tag">[PREVIEW]</span></span>
+                        </div>
+                        <span class="item-price">15K</span>
+                    </li>
+                    <li class="item-row" onclick="openPreview('HOLO KARAKTER', 'https://image2url.com/images/1765306340816-c7840cd2-b9fc-494b-b89a-aa11757b5227.jpg')">
+                        <div class="item-left">
+                            <span class="fake-checkbox"></span>
+                            <span>Holo Karakter (Smooth) <span class="preview-tag">[PREVIEW]</span></span>
+                        </div>
+                        <span class="item-price">35K</span>
+                    </li>
+                </ul>
+                <div class="footer-info">Status: Ready. Klik item untuk melihat contoh tampilan.</div>
+            </div>
+
+            <div class="menu-section">
+                <div class="section-title">
+                    <i class="fas fa-crosshairs"></i> [AIM] FILE CACHERES
+                    <span class="section-badge">ROOT ONLY</span>
+                </div>
+                <ul class="item-list">
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Drag Headshot 100%</div>
+                        <span class="item-price">40K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Leher Headshot</div>
+                        <span class="item-price">40K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Dada Headshot</div>
+                        <span class="item-price">40K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Badan Headshot</div>
+                        <span class="item-price">40K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Magic Bullet</div>
+                        <span class="item-price">20K</span>
+                    </li>
+                </ul>
+                <div class="footer-info">Info: With Showcase in Tools. Free Req Value.</div>
+            </div>
+
+            <div class="menu-section">
+                <div class="section-title">
+                    <i class="fas fa-tools"></i> [MISC] JASA MODIF
+                    <span class="section-badge">ALL DEVICE</span>
+                </div>
+                <ul class="item-list">
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Hapus Holo SS00</div>
+                        <span class="item-price">10K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Add Color Holo</div>
+                        <span class="item-price">10K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Change Color Holo</div>
+                        <span class="item-price">5K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Add Gambar Glowal</div>
+                        <span class="item-price">5K</span>
+                    </li>
+                    <li class="item-row">
+                        <div class="item-left"><span class="fake-checkbox"></span> Change Color Glowal</div>
+                        <span class="item-price">5K</span>
+                    </li>
+                </ul>
+                <div class="footer-info">Info: Use PC (UABE/ASTU) Required.</div>
+            </div>
+
+            <div class="console-box">
+                <div class="log-entry highlight"><span class="timestamp">[SYS]</span> INFO & BONUS PEMBELIAN:</div>
+                <div class="log-entry" style="color: #00ff00"><span class="timestamp">[LOG]</span> Free Akses Permanen</div>
+                <div class="log-entry" style="color: #00ff00"><span class="timestamp">[LOG]</span> Update FF di kasih Holo New</div>
+                <div class="log-entry" style="color: #00ff00"><span class="timestamp">[LOG]</span> Gratis Update buat Member</div>
+                <div class="log-entry" style="color: #00ff00"><span class="timestamp">[LOG]</span> Free Tutor Carpas</div>
+                <div class="log-entry" style="color: #00ff00"><span class="timestamp">[LOG]</span> Free Join GB Private</div>
+                <div class="log-entry" style="color:#d32f2f"><span class="timestamp">[WRN]</span> Admin hanya Menyediakan File</div>
+                <div class="log-entry" style="color:#d32f2f"><span class="timestamp">[WRN]</span> Tidak Menyediakan Virtual</div>
+            </div>
+
+            <a href="https://wa.me/6289653880942?text=Halo%20bang,%20mau%20order%20file%20FF" class="action-btn btn-main">
+                <i class="fab fa-whatsapp"></i> [ORDER NOW] CHAT @EWAA
+            </a>
+
+            <a href="https://whatsapp.com/channel/0029VbCI34V2ZjCpOdI5Hc0e" class="action-btn btn-sec">
+                <i class="fas fa-rss"></i> [JOIN SALURAN UPDATE]
+            </a>
+            
+            <div style="text-align:center; font-size:9px; color:#444; margin-top:10px;">@2025 Ewaa Store. All Rights Reserved.</div>
+
+        </div>
     </div>
     
     <div id="previewModal" class="modal" onclick="closePreview(event)">
