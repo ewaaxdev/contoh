@@ -18,11 +18,7 @@
             --border: rgba(157, 78, 221, 0.3);
         }
 
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            transition: all 0.3s ease;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; transition: all 0.3s ease; }
 
         body {
             background-color: var(--bg-dark);
@@ -32,9 +28,7 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at top right, var(--dark-purple), transparent),
-                radial-gradient(circle at bottom left, #10002b, transparent);
+            background-image: radial-gradient(circle at top right, var(--dark-purple), transparent), radial-gradient(circle at bottom left, #10002b, transparent);
         }
 
         .container {
@@ -58,141 +52,31 @@
         }
 
         .profile-img {
-            width: 90px;
-            height: 90px;
+            width: 80px; height: 80px;
             border-radius: 20px;
-            border: 3px solid var(--primary-purple);
-            box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
+            border: 2px solid var(--primary-purple);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
             object-fit: cover;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #fff, var(--neon-glow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        .header h1 { margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 2px; color: var(--neon-glow); }
 
-        /* --- TAB SYSTEM --- */
-        .tabs-container {
-            padding: 0 15px;
-            margin-bottom: 20px;
-        }
+        /* --- TABS --- */
+        .tabs-container { padding: 0 15px; margin-bottom: 20px; }
+        .tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .tab-btn { flex: 0 0 auto; padding: 8px 16px; border: 1px solid var(--border); background: var(--glass); color: #fff; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 11px; }
+        .tab-btn.active { background: var(--primary-purple); border-color: var(--neon-glow); box-shadow: 0 0 15px var(--primary-purple); }
 
-        .tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-            scrollbar-width: none;
-        }
-        .tabs::-webkit-scrollbar { display: none; }
-
-        .tab-btn {
-            flex: 0 0 auto;
-            padding: 10px 18px;
-            border: 1px solid var(--border);
-            background: var(--glass);
-            color: #fff;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 11px;
-            white-space: nowrap;
-        }
-
-        .tab-btn.active {
-            background: var(--primary-purple);
-            border-color: var(--neon-glow);
-            box-shadow: 0 0 15px var(--primary-purple);
-        }
-
-        /* --- CONTENT --- */
-        .content-section {
-            padding: 0 20px;
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
+        /* --- CARDS --- */
+        .content-section { padding: 0 20px; display: none; }
         .content-section.active { display: block; }
+        .item-card { background: var(--glass); border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .item-info h3 { margin: 0; font-size: 13px; }
+        .item-info .price { color: var(--neon-glow); font-weight: 700; font-size: 12px; }
+        .btn-preview { background: #3c096c; color: #fff; border: 1px solid var(--border); padding: 5px 10px; border-radius: 6px; font-size: 9px; font-weight: bold; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .section-title {
-            font-size: 12px;
-            color: var(--neon-glow);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            display: block;
-            opacity: 0.8;
-        }
-
-        .item-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .item-card:hover {
-            background: rgba(157, 78, 221, 0.15);
-            border-color: var(--neon-glow);
-            transform: translateX(5px);
-        }
-
-        .item-info h3 {
-            margin: 0;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .item-info .price {
-            color: var(--neon-glow);
-            font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-        }
-
-        .btn-preview {
-            background: #3c096c;
-            color: #fff;
-            border: 1px solid var(--border);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        /* --- CONSOLE / LOG BOX --- */
-        .console-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            line-height: 1.6;
-        }
-
-        .log-entry { display: block; margin-bottom: 4px; color: #ccc; }
-        .log-purple { color: var(--neon-glow); }
-        .log-red { color: #ff4d4d; }
-
-        /* --- FIX PREVIEW HP 3D PERSPEKTIF --- */
+        /* --- FIX PREVIEW: HP LANDSCAPE FULL TANPA KEPOTONG --- */
         .modal {
             display: none;
             position: fixed;
@@ -202,88 +86,68 @@
             backdrop-filter: blur(10px);
             align-items: center;
             justify-content: center;
-            perspective: 1200px; /* Memberikan efek kedalaman 3D */
-        }
-
-        .phone-container {
-            transform-style: preserve-3d;
-            transform: rotateX(10deg) rotateY(-25deg) rotateZ(5deg);
-            animation: phoneFloating 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes phoneFloating {
-            from { transform: rotateX(10deg) rotateY(-25deg) rotateZ(5deg) translateY(0); }
-            to { transform: rotateX(15deg) rotateY(-20deg) rotateZ(7deg) translateY(-20px); }
+            perspective: 1000px;
         }
 
         .phone-mockup {
-            width: 320px;
-            height: 650px;
-            background: #080808;
-            border: 8px solid #1a1a1a;
-            border-radius: 40px;
-            position: relative;
-            box-shadow: 
-                -20px 20px 50px rgba(0,0,0,0.8),
-                10px 0 30px rgba(157, 78, 221, 0.3);
-            overflow: hidden;
-        }
-
-        /* Refleksi Layar */
-        .phone-mockup::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .phone-screen {
-            width: 100%; height: 100%;
+            width: 85vw;
+            max-width: 500px; 
+            /* 16:9 Aspect Ratio biar pas gambar FF */
+            aspect-ratio: 16 / 9; 
             background: #000;
+            border: 5px solid #1a1a1a;
+            border-radius: 15px;
             position: relative;
+            /* Efek Miring Gacor */
+            transform: rotateX(15deg) rotateY(-10deg) rotateZ(2deg);
+            box-shadow: 
+                -15px 15px 40px rgba(0,0,0,0.8),
+                0 0 20px rgba(157, 78, 221, 0.4);
             overflow: hidden;
+            animation: phonePopup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .phone-screen img {
-            width: 100%; height: 100%;
-            object-fit: cover;
+        @keyframes phonePopup {
+            from { transform: scale(0.5) rotateX(0) rotateY(0); opacity: 0; }
+            to { transform: scale(1) rotateX(15deg) rotateY(-10deg) rotateZ(2deg); opacity: 1; }
         }
 
-        /* Tombol Close */
+        .phone-screen { width: 100%; height: 100%; background: #000; }
+        
+        /* Gambar full tanpa kepotong */
+        .phone-screen img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* Contain biar gambar asli utuh kelihatan semua */
+            background: #000;
+        }
+
         .modal-close {
-            position: absolute; bottom: 30px;
-            background: #ff4d4d;
-            color: white; border: none;
-            padding: 12px 30px; border-radius: 12px;
-            font-weight: 800; cursor: pointer;
+            position: absolute; 
+            bottom: 40px;
+            background: #ff4d4d; 
+            color: white; 
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 800; 
+            cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 77, 77, 0.4);
-            z-index: 100;
         }
 
-        /* --- ORDER BUTTONS --- */
-        .footer-action {
-            padding: 20px;
-            margin-top: auto;
-        }
-
-        .btn-wa {
-            display: flex; align-items: center; justify-content: center;
-            gap: 12px; background: #25d366; color: white;
-            text-decoration: none; padding: 16px; border-radius: 18px;
-            font-weight: 800; font-size: 14px;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
-        }
+        /* --- FOOTER & CONSOLE --- */
+        .console-box { background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin: 15px 20px; font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+        .log-entry { display: block; margin-bottom: 2px; }
+        .btn-wa { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25d366; color: white; text-decoration: none; padding: 14px; border-radius: 12px; font-weight: 800; font-size: 13px; margin: 0 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <div class="header">
-            <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" class="profile-img" alt="EWAA STORE">
-            <h1>XDEV PROJECT V1</h1>
-            <p style="font-size: 10px; color: var(--neon-glow); margin-top: 8px; font-weight: 600;">PREMIUM FREEFIRE FILE & SERVICES</p>
+            <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" class="profile-img" alt="EWAA">
+            <h1>XDEV PROJECT</h1>
+            <p style="font-size: 10px; color: var(--neon-glow); margin: 5px 0 0 0;">FILE PREMIUM & SERVICES</p>
         </div>
 
         <div class="tabs-container">
@@ -295,7 +159,6 @@
         </div>
 
         <div id="no-root" class="content-section active">
-            <span class="section-title">[ESP] Hologram File</span>
             <div class="item-card" onclick="buy('Holo Senjata', '15K')">
                 <div class="item-info"><h3>Holo Senjata</h3><span class="price">15,000</span></div>
                 <button class="btn-preview" onclick="event.stopPropagation(); openPreview('https://image2url.com/images/1765306184836-d23afa5a-461e-4f45-97b9-6f4ee917f33f.jpg')">PREVIEW</button>
@@ -311,80 +174,49 @@
         </div>
 
         <div id="need-root" class="content-section">
-            <span class="section-title">[AIM] File Cacheres</span>
             <div class="item-card" onclick="buy('Drag Headshot 100%', '40K')">
                 <div class="item-info"><h3>Drag Headshot 100%</h3><span class="price">40,000</span></div>
-                <i class="fas fa-arrow-right" style="color:var(--primary-purple)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Leher Headshot', '40K')">
-                <div class="item-info"><h3>Leher Headshot</h3><span class="price">40,000</span></div>
-                <i class="fas fa-arrow-right" style="color:var(--primary-purple)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Dada Headshot', '40K')">
-                <div class="item-info"><h3>Dada Headshot</h3><span class="price">40,000</span></div>
-                <i class="fas fa-arrow-right" style="color:var(--primary-purple)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Badan Headshot', '40K')">
-                <div class="item-info"><h3>Badan Headshot</h3><span class="price">40,000</span></div>
-                <i class="fas fa-arrow-right" style="color:var(--primary-purple)"></i>
+                <i class="fas fa-chevron-right" style="color:var(--primary-purple)"></i>
             </div>
             <div class="item-card" onclick="buy('Magic Bullet', '20K')">
                 <div class="item-info"><h3>Magic Bullet</h3><span class="price">20,000</span></div>
-                <i class="fas fa-arrow-right" style="color:var(--primary-purple)"></i>
+                <i class="fas fa-chevron-right" style="color:var(--primary-purple)"></i>
             </div>
         </div>
 
         <div id="jasa-modif" class="content-section">
-            <span class="section-title">[MISC] Jasa Modif File</span>
-            <div class="item-card" onclick="buy('Hapus Holo SS00', '10K')">
+            <div class="item-card" onclick="buy('Hapus Holo', '10K')">
                 <div class="item-info"><h3>Hapus Holo SS00</h3><span class="price">10,000</span></div>
                 <i class="fas fa-tools" style="color:var(--primary-purple)"></i>
             </div>
-            <div class="item-card" onclick="buy('Add Color Holo', '10K')">
+            <div class="item-card" onclick="buy('Add Color', '10K')">
                 <div class="item-info"><h3>Add Color Holo</h3><span class="price">10,000</span></div>
                 <i class="fas fa-tools" style="color:var(--primary-purple)"></i>
             </div>
-            <div class="item-card" onclick="buy('Change Color Holo', '5K')">
+            <div class="item-card" onclick="buy('Change Color', '5K')">
                 <div class="item-info"><h3>Change Color Holo</h3><span class="price">5,000</span></div>
                 <i class="fas fa-tools" style="color:var(--primary-purple)"></i>
             </div>
-            <div class="item-card" onclick="buy('Add Gambar Glowal', '5K')">
-                <div class="item-info"><h3>Add Gambar Glowal</h3><span class="price">5,000</span></div>
-                <i class="fas fa-tools" style="color:var(--primary-purple)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Change Color Glowal', '5K')">
-                <div class="item-info"><h3>Change Color Glowal</h3><span class="price">5,000</span></div>
-                <i class="fas fa-tools" style="color:var(--primary-purple)"></i>
-            </div>
         </div>
 
-        <div style="padding: 0 20px;">
-            <div class="console-box">
-                <span class="log-entry log-purple">> [SYS] STATUS: CONNECTED</span>
-                <span class="log-entry">> Free Akses Permanen & Update Holo</span>
-                <span class="log-entry">> Free Tutor Carpas & GB Private</span>
-                <span class="log-entry log-red">> [WRN] Tidak Menyediakan Virtual</span>
-                <span class="log-entry log-red">> [WRN] Admin Hanya Menyediakan File</span>
-            </div>
+        <div class="console-box">
+            <span class="log-entry" style="color:var(--neon-glow)">> [SYS] STATUS: CONNECTED</span>
+            <span class="log-entry">> Free Update & Tutor Carpas</span>
+            <span class="log-entry" style="color:#ff4d4d">> [WRN] No Virtual - File Only</span>
         </div>
 
-        <div class="footer-action">
-            <a href="https://wa.me/6289653880942?text=Halo%20bang,%20mau%20order%20file%20FF" class="btn-wa">
-                <i class="fab fa-whatsapp"></i> ORDER VIA WHATSAPP
-            </a>
-            <p style="text-align: center; font-size: 10px; color: #555; margin-top: 15px;">© 2025 EWAA STORE. ALL RIGHTS RESERVED.</p>
-        </div>
+        <a href="https://wa.me/6289653880942?text=Halo%20bang,%20mau%20order%20file%20FF" class="btn-wa">
+            <i class="fab fa-whatsapp"></i> HUBUNGI WHATSAPP
+        </a>
     </div>
 
     <div class="modal" id="previewModal">
-        <div class="phone-container">
-            <div class="phone-mockup">
-                <div class="phone-screen">
-                    <img id="modalImg" src="" alt="Gameplay Preview">
-                </div>
+        <div class="phone-mockup">
+            <div class="phone-screen">
+                <img id="modalImg" src="" alt="Preview Game">
             </div>
         </div>
-        <button class="modal-close" onclick="closePreview()">BACK TO STORE</button>
+        <button class="modal-close" onclick="closePreview()">CLOSE PREVIEW</button>
     </div>
 
     <script>
@@ -394,25 +226,18 @@
             e.currentTarget.classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }
-
         function buy(name, price) {
-            const num = "6289653880942";
-            const msg = `Halo bang, pengen buy ${name} harga ${price}`;
-            window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
+            const msg = encodeURIComponent(`Halo bang, mau beli ${name} harga ${price}`);
+            window.open(`https://wa.me/6289653880942?text=${msg}`, '_blank');
         }
-
         function openPreview(src) {
             document.getElementById('modalImg').src = src;
             document.getElementById('previewModal').style.display = 'flex';
         }
-
-        function closePreview() {
-            document.getElementById('previewModal').style.display = 'none';
-        }
-
+        function closePreview() { document.getElementById('previewModal').style.display = 'none'; }
+        
         window.onclick = function(event) {
-            const modal = document.getElementById('previewModal');
-            if (event.target == modal) { modal.style.display = 'none'; }
+            if (event.target.className === 'modal') closePreview();
         }
     </script>
 </body>
