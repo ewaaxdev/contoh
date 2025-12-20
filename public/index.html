@@ -192,59 +192,70 @@
         .log-purple { color: var(--neon-glow); }
         .log-red { color: #ff4d4d; }
 
-        /* --- SMARTPHONE MODAL --- */
+        /* --- SMARTPHONE MODAL (Layar Miring Sesuai Pict) --- */
         .modal {
             display: none;
             position: fixed;
             z-index: 9999;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
+        /* Phone mockup miring miring (landscape + tilted) */
         .phone-mockup {
-            width: 290px;
-            height: 600px;
+            width: 550px; /* Ukuran landscape */
+            height: 270px;
             background: #000;
-            border: 14px solid #1a1a1a;
-            border-radius: 45px;
+            border: 12px solid #1a1a1a;
+            border-radius: 35px;
             position: relative;
-            box-shadow: 0 0 60px rgba(157, 78, 221, 0.4);
-            animation: slideUp 0.4s ease;
+            box-shadow: 0 0 80px rgba(157, 78, 221, 0.6);
+            /* INI BAGIAN LAYAR MIRINGNYA */
+            transform: rotate(-15deg) skew(10deg); 
+            animation: phoneEntrance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        @keyframes phoneEntrance {
+            from { transform: rotate(0deg) scale(0.5); opacity: 0; }
+            to { transform: rotate(-15deg) skew(10deg) scale(1); opacity: 1; }
         }
 
+        /* Notch / Speaker di sisi samping (karena landscape) */
         .phone-speaker {
-            width: 60px; height: 5px;
+            width: 5px; height: 50px;
             background: #333;
-            position: absolute; top: 15px; left: 50%;
-            transform: translateX(-50%); border-radius: 10px;
+            position: absolute; left: 15px; top: 50%;
+            transform: translateY(-50%); border-radius: 10px;
             z-index: 10;
         }
 
         .phone-screen {
             width: 100%; height: 100%;
             overflow: hidden;
-            border-radius: 32px;
+            border-radius: 22px;
             background: #111;
+            position: relative;
         }
 
-        .phone-screen img { width: 100%; height: 100%; object-fit: cover; }
+        .phone-screen img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
 
+        /* Button close dipindah agar tidak terhalang miringnya hp */
         .modal-close {
-            position: absolute; bottom: -70px; left: 50%;
-            transform: translateX(-50%);
+            position: absolute; bottom: 50px;
             background: var(--primary-purple);
             color: white; border: none;
-            padding: 12px 35px; border-radius: 30px;
+            padding: 15px 40px; border-radius: 50px;
             font-weight: 800; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.5);
+            z-index: 100;
         }
 
         /* --- ORDER BUTTONS --- */
@@ -367,8 +378,8 @@
             <div class="phone-screen">
                 <img id="modalImg" src="" alt="SS Game">
             </div>
-            <button class="modal-close" onclick="closePreview()">CLOSE SYSTEM</button>
         </div>
+        <button class="modal-close" onclick="closePreview()">CLOSE SYSTEM</button>
     </div>
 
     <script>
