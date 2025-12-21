@@ -12,9 +12,9 @@
             /* TEMA SIANG */
             --pixel-bg-img: url('https://i.imgur.com/5WYhIy1.jpeg');
             --pixel-bg-color: #5c94fc;
-            --container-bg: rgba(255, 255, 255, 0.05); /* Transparan Tipis */
+            --container-bg: rgba(255, 255, 255, 0.05); 
             --pixel-yellow: #f8d878;
-            --pixel-white: rgba(255, 255, 255, 0.9); /* Card lebih menyatu */
+            --pixel-white: rgba(255, 255, 255, 0.9);
             --text-main: #000000;
             --pixel-green: #00a000;
             --border-pixel: inset -4px -4px 0px 0px #888, inset 4px 4px 0px 0px #fff, 0px 0px 0px 4px #000;
@@ -26,7 +26,7 @@
             --pixel-bg-color: #1a1a2e;
             --container-bg: rgba(0, 0, 0, 0.2);
             --pixel-yellow: #e5a50a;
-            --pixel-white: rgba(40, 40, 40, 0.85); /* Card gelap transparan */
+            --pixel-white: rgba(40, 40, 40, 0.85);
             --text-main: #ffffff;
             --pixel-green: #00ff00;
             --border-pixel: inset -4px -4px 0px 0px #000, inset 4px 4px 0px 0px #555, 0px 0px 0px 4px #fff;
@@ -39,7 +39,6 @@
             background-image: var(--pixel-bg-img);
             background-size: cover;
             background-position: center;
-            /* FIX BACKGROUND MULUS: Pakai fixed agar gambar tidak ikut gerak */
             background-attachment: fixed;
             background-repeat: no-repeat;
             image-rendering: pixelated;
@@ -49,7 +48,6 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            /* Hapus transisi background agar tidak delay saat scroll di mobile */
             transition: none; 
         }
 
@@ -57,7 +55,6 @@
             width: 100%;
             max-width: 480px;
             background: var(--container-bg);
-            /* Glassmorphism tipis agar menyatu dengan background pixel */
             backdrop-filter: blur(2px);
             min-height: 100vh;
             display: flex;
@@ -114,7 +111,6 @@
             align-items: center;
             gap: 15px;
             padding: 60px 20px 20px;
-            /* Gradient transparan agar menyatu dengan world background */
             background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
             border-bottom: 6px solid #000;
         }
@@ -144,7 +140,7 @@
         /* --- TABS --- */
         .tabs-container { 
             padding: 20px;
-            position: sticky; /* Lock tab saat scroll */
+            position: sticky; 
             top: 0;
             background: rgba(0,0,0,0.3);
             z-index: 90;
@@ -208,7 +204,6 @@
             box-shadow: inset -4px -4px 0px 0px #005000, inset 4px 4px 0px 0px #80ff80, 0px 0px 0px 4px #000;
         }
 
-        /* --- MODAL --- */
         .modal { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
         .phone-mockup { width: 85vw; max-width: 400px; background: #000; border: 8px solid #555; position: relative; }
         .phone-screen img { width: 100%; display: block; }
@@ -217,12 +212,19 @@
 </head>
 <body data-theme="light">
 
+    <audio id="bgm-siang" loop>
+        <source src="https://files.catbox.moe/0v2i10.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="bgm-malam" loop>
+        <source src="https://files.catbox.moe/u8u6y8.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="welcome-popup" id="welcomePopup">
         <div class="popup-card">
             <i class="fas fa-coins" style="font-size: 40px; color: #f8d878; margin-bottom: 15px;"></i>
             <h2>! WARNING !</h2>
             <p>BACA YANG TELITI SEBELUM MEMBELI!!<br><br>PASTIKAN ANDA MEMAHAMI KETENTUAN KAMI.</p>
-            <button class="btn-preview" style="width:100%; font-size:10px; padding:15px;" onclick="closePopup()">SAYA MENGERTI</button>
+            <button class="btn-preview" style="width:100%; font-size:10px; padding:15px;" onclick="initAudioAndClose()">SAYA MENGERTI</button>
         </div>
     </div>
 
@@ -330,29 +332,46 @@
     </div>
 
     <script>
+        const siangAudio = document.getElementById('bgm-siang');
+        const malamAudio = document.getElementById('bgm-malam');
+
+        function initAudioAndClose() {
+            // Jalankan audio pertama kali saat tombol di klik
+            siangAudio.play().catch(e => console.log("Audio play blocked"));
+            document.getElementById('welcomePopup').style.display = 'none';
+        }
+
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('theme-icon');
             const text = document.getElementById('theme-text');
+            
             if (body.getAttribute('data-theme') === 'light') {
                 body.setAttribute('data-theme', 'dark');
                 icon.className = 'fas fa-moon';
                 text.innerText = 'MALAM';
+                
+                // Switch Musik ke Malam
+                siangAudio.pause();
+                malamAudio.currentTime = 0;
+                malamAudio.play();
             } else {
                 body.setAttribute('data-theme', 'light');
                 icon.className = 'fas fa-sun';
                 text.innerText = 'SIANG';
+                
+                // Switch Musik ke Siang
+                malamAudio.pause();
+                siangAudio.currentTime = 0;
+                siangAudio.play();
             }
         }
-
-        function closePopup() { document.getElementById('welcomePopup').style.display = 'none'; }
 
         function switchTab(e, tabId) {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             e.currentTarget.classList.add('active');
             document.getElementById(tabId).classList.add('active');
-            // Auto-scroll ke atas saat ganti tab agar mulus
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
