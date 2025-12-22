@@ -312,14 +312,14 @@
     </div>
 
     <script>
-        // 103: Anti-Debug & Anti-Inspect (Brutal)
+        // Security Logic
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
                 return false;
             }
         };
 
-        // 104: Console Auto-Streaming Logic
+        // Console Logic
         const logs = [
             "Bypassing Anticheat...", "Fetching Shader IDs...", "Connection Stable", 
             "Injecting Memory Patch...", "User Authorized", "ZWrite Override: ON",
@@ -335,21 +335,36 @@
             con.scrollTop = con.scrollHeight;
         }, 2000);
 
-        // 105: Fake Buyer Notifications (Brutal Marketing)
-        const fakeUsers = ["Rafi", "Dimas", "Sultan_FF", "Ghost_Mod", "Anon_X"];
+        // 105: BRUTAL FAKE BUYER ENGINE (CUSTOMIZED)
+        const fakeUsers = [
+            "Rafi", "Dimas", "Sultan_FF", "Ghost_Mod", "Anon_X", "Rian_Gamer", "Vina_Gils", "Bocil_Epep", 
+            "Gopal_FF", "Ezza_Savage", "Zaky_Modz", "Farel_Dev", "User_99", "Riichi", "X-Force", "Nexus", 
+            "Arip_Gans", "Dika_Slayer", "Tzy_Sky", "Lord_Holo", "Kanz_FF", "Mba_Selly", "Kuro_Net", "Saber_Void"
+        ];
+        
+        const allItems = [
+            "Holo Senjata", "Holo Bundle", "Holo Karakter", "Drag Headshot 100%", "Leher Headshot", 
+            "Dada Headshot", "Badan Headshot", "Magic Bullet", "Hapus Holo SS00", "Add Color Holo", 
+            "Change Color Holo", "Add Gambar Glowal", "Change Color Glowal"
+        ];
+
         setInterval(() => {
             const notif = document.getElementById('buyer-notif');
             const user = fakeUsers[Math.floor(Math.random()*fakeUsers.length)];
-            document.getElementById('notif-text').innerText = `${user} baru saja membeli Holo`;
+            const item = allItems[Math.floor(Math.random()*allItems.length)];
+            
+            document.getElementById('notif-text').innerText = `${user} baru saja membeli ${item}`;
             notif.style.display = 'flex';
+            notif.classList.remove('animate__fadeOutRight');
             notif.classList.add('animate__animated', 'animate__fadeInRight');
+            
             setTimeout(() => {
                 notif.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
-                setTimeout(() => { notif.style.display = 'none'; notif.classList.remove('animate__fadeOutRight'); }, 500);
-            }, 3000);
-        }, 12000);
+                setTimeout(() => { notif.style.display = 'none'; }, 500);
+            }, 3500);
+        }, 8000); // Interval 8 detik agar terlihat ramai tapi tetap realistis
 
-        // Header Logic
+        // Header Scroll
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -394,7 +409,7 @@
             setTimeout(() => document.getElementById('welcomePopup').style.display='none', 500);
         }
 
-        // Particle System
+        // Particles Rain
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -423,7 +438,7 @@
         }
         anim();
 
-        // Greeting Dynamic
+        // Greeting
         const hr = new Date().getHours();
         document.getElementById('greeting').innerText = (hr < 12 ? "GOOD MORNING" : hr < 18 ? "GOOD AFTERNOON" : "GOOD EVENING") + " COMMANDER";
     </script>
