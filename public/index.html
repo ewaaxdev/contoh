@@ -2,445 +2,95 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>XDEV PROJECT V1 - NEKRO PURPLE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEKRO_PYTHON_DIVERSE</title>
+    
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
 
     <style>
-        :root {
-            --primary: #9d4edd;
-            --dark: #05010a;
-            --glow: #c77dff;
-            --glass: rgba(157, 78, 221, 0.05);
-            --border: rgba(157, 78, 221, 0.25);
-            --success: #00ff88;
-            --error: #ff4d4d;
-            --neon-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
-        }
-
-        /* 1-10: Base Abyss UI Logic */
-        html, body {
-            height: 100%; margin: 0; padding: 0;
-            background-color: var(--dark);
-            overflow-x: hidden; color: #fff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        /* 11-20: Advanced Background Layering */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, #240046 0%, #05010a 80%);
-            z-index: -2;
-        }
-
-        .cyber-grid {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--border) 1px, transparent 1px), 
-                              linear-gradient(90deg, var(--border) 1px, transparent 1px);
-            background-size: 30px 30px; z-index: -1; opacity: 0.15;
-            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
-        }
-
-        /* 21-30: Interactivity & Security */
-        * { 
-            box-sizing: border-box; 
-            -webkit-tap-highlight-color: transparent; 
-            user-select: none !important;
-            outline: none !important;
-        }
-
-        #progress-bar {
-            position: fixed; top: 0; left: 0; height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--glow), var(--success));
-            width: 0%; z-index: 10001; transition: width 0.3s ease;
-            box-shadow: var(--neon-shadow);
-        }
-
-        /* 31-40: Container & Header Shrink Logic */
-        .container {
-            width: 100%; max-width: 480px; margin: 0 auto;
-            background: rgba(5, 1, 10, 0.7); backdrop-filter: blur(20px);
-            min-height: 100vh; display: flex; flex-direction: column;
-            border-left: 1px solid var(--border); border-right: 1px solid var(--border);
-            position: relative;
-        }
-
-        .header { 
-            padding: 80px 20px 40px; text-align: center; 
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .profile-img {
-            width: 120px; height: 120px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            border: 2px solid var(--primary); padding: 5px;
-            box-shadow: var(--neon-shadow);
-            animation: morphing 8s infinite ease-in-out, glowPulse 3s infinite;
-        }
-
-        @keyframes morphing {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
-            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
-            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-        }
-
-        /* 41-50: Tabs & Buttons Evolution */
-        .tabs-container { 
-            position: sticky; top: 0; z-index: 100; padding: 12px; 
-            background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-        
-        .tab-btn { 
-            flex: 1; padding: 12px 10px; border-radius: 12px;
-            border: 1px solid var(--border); background: var(--glass);
-            color: #fff; font-weight: 700; font-size: 10px; white-space: nowrap;
-            transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        .tab-btn.active { 
-            background: var(--primary); border-color: var(--glow);
-            box-shadow: 0 0 20px rgba(157, 78, 221, 0.4);
-            transform: scale(1.05);
-        }
-
-        /* 51-60: Card Glitch & Hover Effects */
-        .content-section { padding: 20px; display: none; }
-        .content-section.active { display: block; animation: fadeInUp 0.4s both; }
-
-        .item-card { 
-            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(157, 78, 221, 0.05));
-            border: 1px solid var(--border); border-radius: 20px; 
-            padding: 20px; margin-bottom: 15px;
-            display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative; overflow: hidden;
-        }
-
-        .item-card:hover { 
-            border-color: var(--primary); 
-            transform: translateX(5px);
-            background: rgba(157, 78, 221, 0.1);
-        }
-
-        .item-card h3 { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: 0.5px; }
-        .price { 
-            color: var(--success); font-family: 'JetBrains Mono'; 
-            font-size: 13px; font-weight: 700;
-        }
-
-        /* 61-70: Advanced Notifications */
-        #buyer-notif {
-            position: fixed; top: 20px; right: 20px; 
-            background: rgba(15, 2, 26, 0.95); border: 1px solid var(--primary);
-            padding: 10px 15px; border-radius: 12px; z-index: 10002;
-            display: none; align-items: center; gap: 10px; font-size: 11px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-
-        /* 71-80: Console Box Stream */
-        .console-box { 
-            background: #000; border-radius: 15px; padding: 15px; 
-            font-family: 'JetBrains Mono'; font-size: 10px; border: 1px solid var(--border);
-            height: 160px; overflow-y: hidden; line-height: 1.8;
-            position: relative;
-        }
-
-        .console-box::after {
-            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 40px;
-            background: linear-gradient(transparent, #000);
-        }
-
-        /* 81-90: CTAs & Footer */
-        .btn-wa { 
-            background: linear-gradient(45deg, #25d366, #128c7e);
-            display: flex; align-items: center; justify-content: center;
-            gap: 10px; padding: 18px; border-radius: 18px; color: #fff; 
-            text-decoration: none; font-weight: 800; font-size: 13px;
-            transition: 0.3s; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-wa:active { transform: scale(0.95); }
-
-        /* 91-100: Popup & Modal 3D Logic */
-        .popup-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #05010a; z-index: 999999;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .popup-3d {
-            background: #0f021a; padding: 40px 30px; border-radius: 30px;
-            text-align: center; border: 1px solid var(--primary); width: 85%;
-            max-width: 350px; box-shadow: 0 0 50px rgba(157, 78, 221, 0.2);
-        }
-
-        /* Particles Rain */
-        #particles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-2; pointer-events:none; }
+        * { box-sizing: border-box; }
+        body { background: #050505; color: #00ff41; font-family: 'Consolas', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #00ff41; padding-bottom: 10px; margin-bottom: 20px; text-shadow: 0 0 10px #00ff41; }
+        .main-box { flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
+        textarea { width: 100%; height: 60%; background: #000; color: #00ff41; border: 1px solid #00ff41; padding: 15px; font-size: 16px; outline: none; box-shadow: inset 0 0 5px #00ff41; }
+        .controls { display: flex; gap: 10px; }
+        button { background: #00ff41; color: #000; border: none; padding: 12px 25px; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; }
+        button:hover { background: #fff; box-shadow: 0 0 20px #00ff41; }
+        button:disabled { background: #333; color: #666; cursor: not-allowed; }
+        #output { flex-grow: 1; background: #000; border: 1px solid #333; padding: 15px; overflow-y: auto; white-space: pre-wrap; color: #00d9ff; font-size: 14px; border-left: 4px solid #00ff41; }
+        .loading { color: orange; font-style: italic; }
     </style>
 </head>
-<body oncontextmenu="return false;">
-    <div id="progress-bar"></div>
-    <div class="cyber-grid"></div>
-    <canvas id="particles"></canvas>
+<body>
 
-    <div id="buyer-notif">
-        <div style="width:8px; height:8px; background:var(--success); border-radius:50%; box-shadow:0 0 10px var(--success);"></div>
-        <span id="notif-text">System Active</span>
+<div class="header">
+    <h1>[ NEKRO PYTHON HOST - DIVERSE ]</h1>
+</div>
+
+<div class="main-box">
+    <div id="status" class="loading">Inisialisasi Python Engine... (Tunggu Bentar)</div>
+    
+    <textarea id="code" placeholder="Tulis kode Python lu disini...">
+import sys
+print("Sistem Python Diversed Aktif!")
+print(f"Versi Python: {sys.version}")
+
+def greet(name):
+    return f"Halo, {name}! Script ini jalan di dalam HTML."
+
+print(greet("Nekro"))
+    </textarea>
+
+    <div class="controls">
+        <button id="run-btn" onclick="runPython()" disabled>EKSEKUSI (RUN)</button>
+        <button onclick="clearOutput()">BERSIHKAN</button>
     </div>
 
-    <div class="popup-overlay" id="welcomePopup">
-        <div class="popup-3d animate__animated animate__jackInTheBox">
-            <div id="scan-line-modal" style="position:absolute; top:0; left:0; width:100%; height:2px; background:var(--primary); box-shadow:0 0 15px var(--primary); animation: scan 2s infinite;"></div>
-            <i class="fas fa-fingerprint" style="font-size: 60px; color: var(--glow); margin-bottom: 20px;"></i>
-            <h2 id="greeting" style="margin:0; font-size:18px; color: #fff; letter-spacing:2px;">READY TO SYNC</h2>
-            <p style="font-size: 11px; color: #666; margin: 20px 0; line-height:1.6;">IDENTIFYING BIOMETRICS...<br><span style="color: var(--primary);">AUTHORIZED ACCESS ONLY.</span></p>
-            <button onclick="closePopup()" style="background:var(--primary); color:#fff; border:none; padding:16px; border-radius:15px; font-weight:800; cursor:pointer; width:100%; box-shadow: 0 10px 20px rgba(157, 78, 221, 0.3);">CONFIRM IDENTITY</button>
-        </div>
-    </div>
+    <div id="output">Output log akan muncul disini...</div>
+</div>
 
-    <div class="container no-select">
-        <div class="status-pill" style="display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.6); padding: 8px 15px; border-radius: 30px; font-size: 9px; font-weight: 800; position: absolute; top: 20px; left: 20px; border: 1px solid var(--border); z-index: 10; color: #fff;">
-            <div style="width: 8px; height: 8px; background: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); animation: pulse 2s infinite;"></div> 
-            <span id="admin-status">ADMIN ONLINE</span>
-        </div>
+<script>
+    let pyodide;
+    const outputElement = document.getElementById("output");
+    const statusElement = document.getElementById("status");
+    const btn = document.getElementById("run-btn");
 
-        <div class="header" id="mainHeader">
-            <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" class="profile-img">
-            <h1 style="margin: 15px 0 5px; font-size: 26px; font-weight: 800; background: linear-gradient(90deg, #fff, var(--glow), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">XDEV PROJECT V1</h1>
-            <p style="font-size: 10px; color: var(--glow); font-weight: 700; letter-spacing: 2px; opacity: 0.7;">ENCRYPTED FILE SERVICES</p>
-        </div>
+    // SETUP ENGINE
+    async function initPyodide() {
+        try {
+            pyodide = await loadPyodide();
+            statusElement.innerText = "● ENGINE READY: Python WebAssembly Loaded.";
+            statusElement.style.color = "#00ff41";
+            btn.disabled = false;
+        } catch (err) {
+            statusElement.innerText = "❌ Gagal memuat Python.";
+            console.error(err);
+        }
+    }
 
-        <div class="tabs-container">
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab(event, 'no-root')">NO ROOT (HOLO)</button>
-                <button class="tab-btn" onclick="switchTab(event, 'need-root')">NEED ROOT (AIM)</button>
-                <button class="tab-btn" onclick="switchTab(event, 'jasa-modif')">JASA MODIF</button>
-            </div>
-        </div>
-
-        <div id="no-root" class="content-section active">
-            <span style="font-size: 10px; color: var(--glow); font-weight: 800; margin-bottom: 15px; display: block;">[ ESP ] Hologram File</span>
-            <div class="item-card" onclick="buy('Holo Senjata', '15K')">
-                <div><h3>Holo Senjata</h3><span class="price">15,000</span></div>
-                <button class="tab-btn" style="padding:8px 15px; flex:none;" onclick="event.stopPropagation(); openPreview('https://image2url.com/images/1765306184836-d23afa5a-461e-4f45-97b9-6f4ee917f33f.jpg')">VIEW</button>
-            </div>
-            <div class="item-card" onclick="buy('Holo Bundle', '15K')">
-                <div><h3>Holo Bundle</h3><span class="price">15,000</span></div>
-                <button class="tab-btn" style="padding:8px 15px; flex:none;" onclick="event.stopPropagation(); openPreview('https://image2url.com/images/1765306277952-d029adf2-ceb8-4074-a504-822d092e7022.jpg')">VIEW</button>
-            </div>
-            <div class="item-card" onclick="buy('Holo Karakter', '35K')">
-                <div><h3>Holo Karakter</h3><span class="price">35,000</span></div>
-                <button class="tab-btn" style="padding:8px 15px; flex:none;" onclick="event.stopPropagation(); openPreview('https://image2url.com/images/1765306340816-c7840cd2-b9fc-494b-b89a-aa11757b5227.jpg')">VIEW</button>
-            </div>
-        </div>
-
-        <div id="need-root" class="content-section">
-            <span style="font-size: 10px; color: var(--glow); font-weight: 800; margin-bottom: 15px; display: block;">[ AIM ] File Cacheres</span>
-            <div class="item-card" onclick="buy('Drag Headshot 100%', '40K')">
-                <div><h3>Drag Headshot 100%</h3><span class="price">40,000</span></div>
-                <i class="fas fa-crosshairs" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Leher Headshot', '40K')">
-                <div><h3>Leher Headshot</h3><span class="price">40,000</span></div>
-                <i class="fas fa-crosshairs" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Dada Headshot', '40K')">
-                <div><h3>Dada Headshot</h3><span class="price">40,000</span></div>
-                <i class="fas fa-crosshairs" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Badan Headshot', '40K')">
-                <div><h3>Badan Headshot</h3><span class="price">40,000</span></div>
-                <i class="fas fa-crosshairs" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Magic Bullet', '20K')">
-                <div><h3>Magic Bullet</h3><span class="price">20,000</span></div>
-                <i class="fas fa-crosshairs" style="color:var(--primary)"></i>
-            </div>
-        </div>
-
-        <div id="jasa-modif" class="content-section">
-            <span style="font-size: 10px; color: var(--glow); font-weight: 800; margin-bottom: 15px; display: block;">[ MISC ] Jasa Modif File</span>
-            <div class="item-card" onclick="buy('Hapus Holo SS00', '10K')">
-                <div><h3>Hapus Holo SS00</h3><span class="price">10,000</span></div>
-                <i class="fas fa-cog fa-spin" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Add Color Holo', '10K')">
-                <div><h3>Add Color Holo</h3><span class="price">10,000</span></div>
-                <i class="fas fa-palette" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Change Color Holo', '5K')">
-                <div><h3>Change Color Holo</h3><span class="price">5,000</span></div>
-                <i class="fas fa-sliders-h" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Add Gambar Glowal', '5K')">
-                <div><h3>Add Gambar Glowal</h3><span class="price">5,000</span></div>
-                <i class="fas fa-image" style="color:var(--primary)"></i>
-            </div>
-            <div class="item-card" onclick="buy('Change Color Glowal', '5K')">
-                <div><h3>Change Color Glowal</h3><span class="price">5,000</span></div>
-                <i class="fas fa-tint" style="color:var(--primary)"></i>
-            </div>
-        </div>
-
-        <div style="padding:20px;">
-            <div class="console-box" id="console">
-                <span style="color:var(--success)">[OK] SECURE_CONNECTION_ESTABLISHED</span><br>
-                <span id="fps-counter" style="color:var(--glow)">[SYS] FPS: 60.0</span><br>
-                <span style="color:#aaa">> Initializing XDEV_CORE_LOGIC...</span>
-            </div>
-        </div>
-
-        <div style="padding:20px; margin-top: auto;">
-            <a href="https://wa.me/6289653880942" class="btn-wa">
-                <i class="fab fa-whatsapp"></i> EXECUTE ORDER VIA WA
-            </a>
-            <p style="text-align:center; font-size:10px; color:#444; margin-top:20px; letter-spacing:1px;">PROTECTED BY NEKROFUSION_PRIME © 2025</p>
-        </div>
-    </div>
-
-    <div style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; align-items: center; justify-content: center; padding: 20px;" id="previewModal" onclick="closePreview()">
-        <div style="width: 100%; max-width: 400px; aspect-ratio: 9/16; background: #000; border: 4px solid #333; border-radius: 30px; overflow: hidden; position: relative; box-shadow: 0 0 50px var(--primary);" class="animate__animated animate__zoomIn">
-            <img id="modalImg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-    </div>
-
-    <script>
-        // Security Logic
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
-                return false;
-            }
-        };
-
-        // Console Logic
-        const logs = [
-            "Bypassing Anticheat...", "Fetching Shader IDs...", "Connection Stable", 
-            "Injecting Memory Patch...", "User Authorized", "ZWrite Override: ON",
-            "DepthTest Always: ACTIVE", "Mali GPU Detected", "Adreno Hooking..."
-        ];
-        setInterval(() => {
-            const con = document.getElementById('console');
-            const log = logs[Math.floor(Math.random()*logs.length)];
-            const span = document.createElement('span');
-            span.innerHTML = `<br><span style="color:#555">> [LOG] ${log}</span>`;
-            con.appendChild(span);
-            if(con.childNodes.length > 20) con.removeChild(con.childNodes[0]);
-            con.scrollTop = con.scrollHeight;
-        }, 2000);
-
-        // 105: BRUTAL FAKE BUYER ENGINE (CUSTOMIZED)
-        const fakeUsers = [
-            "Rafi", "Dimas", "Sultan_FF", "Ghost_Mod", "Anon_X", "Rian_Gamer", "Vina_Gils", "Bocil_Epep", 
-            "Gopal_FF", "Ezza_Savage", "Zaky_Modz", "Farel_Dev", "User_99", "Riichi", "X-Force", "Nexus", 
-            "Arip_Gans", "Dika_Slayer", "Tzy_Sky", "Lord_Holo", "Kanz_FF", "Mba_Selly", "Kuro_Net", "Saber_Void"
-        ];
+    async function runPython() {
+        const code = document.getElementById("code").value;
+        outputElement.innerText = ">>> Running...\n";
         
-        const allItems = [
-            "Holo Senjata", "Holo Bundle", "Holo Karakter", "Drag Headshot 100%", "Leher Headshot", 
-            "Dada Headshot", "Badan Headshot", "Magic Bullet", "Hapus Holo SS00", "Add Color Holo", 
-            "Change Color Holo", "Add Gambar Glowal", "Change Color Glowal"
-        ];
+        // Redirect stdout ke div output
+        pyodide.setStdout({ batched: (str) => {
+            outputElement.innerText += str + "\n";
+        }});
 
-        setInterval(() => {
-            const notif = document.getElementById('buyer-notif');
-            const user = fakeUsers[Math.floor(Math.random()*fakeUsers.length)];
-            const item = allItems[Math.floor(Math.random()*allItems.length)];
-            
-            document.getElementById('notif-text').innerText = `${user} baru saja membeli ${item}`;
-            notif.style.display = 'flex';
-            notif.classList.remove('animate__fadeOutRight');
-            notif.classList.add('animate__animated', 'animate__fadeInRight');
-            
-            setTimeout(() => {
-                notif.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
-                setTimeout(() => { notif.style.display = 'none'; }, 500);
-            }, 3500);
-        }, 8000); // Interval 8 detik agar terlihat ramai tapi tetap realistis
-
-        // Header Scroll
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress-bar").style.width = scrolled + "%";
-            
-            const header = document.getElementById("mainHeader");
-            if (winScroll > 50) {
-                header.style.padding = "20px";
-                header.querySelector("img").style.width = "60px";
-                header.querySelector("img").style.height = "60px";
-            } else {
-                header.style.padding = "80px 20px 40px";
-                header.querySelector("img").style.width = "120px";
-                header.querySelector("img").style.height = "120px";
-            }
-        };
-
-        function switchTab(e, tabId) {
-            if (window.navigator.vibrate) window.navigator.vibrate(15);
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            e.currentTarget.classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+        try {
+            await pyodide.runPythonAsync(code);
+        } catch (err) {
+            outputElement.innerText += "\n[ERROR]: " + err;
         }
+    }
 
-        function openPreview(src) {
-            document.getElementById('modalImg').src = src;
-            document.getElementById('previewModal').style.display = 'flex';
-        }
+    function clearOutput() {
+        outputElement.innerText = "";
+    }
 
-        function closePreview() { document.getElementById('previewModal').style.display = 'none'; }
+    // Jalankan inisialisasi saat page diload
+    initPyodide();
+</script>
 
-        function buy(name, price) {
-            if (window.navigator.vibrate) window.navigator.vibrate([30, 30, 30]);
-            window.open(`https://wa.me/6289653880942?text=Halo Admin, saya order ${name} - ${price}`, '_blank');
-        }
-
-        function closePopup() { 
-            if (window.navigator.vibrate) window.navigator.vibrate(50);
-            document.getElementById('welcomePopup').classList.add('animate__animated', 'animate__fadeOut');
-            setTimeout(() => document.getElementById('welcomePopup').style.display='none', 500);
-        }
-
-        // Particles Rain
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        let particles = [];
-        class P {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.s = Math.random() * 2;
-                this.v = Math.random() * 0.5 + 0.2;
-            }
-            draw() {
-                ctx.fillStyle = 'rgba(157, 78, 221, 0.4)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.s, 0, Math.PI*2); ctx.fill();
-            }
-            update() {
-                this.y += this.v; if(this.y > canvas.height) this.y = 0;
-            }
-        }
-        for(let i=0; i<60; i++) particles.push(new P());
-        function anim() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(anim);
-        }
-        anim();
-
-        // Greeting
-        const hr = new Date().getHours();
-        document.getElementById('greeting').innerText = (hr < 12 ? "GOOD MORNING" : hr < 18 ? "GOOD AFTERNOON" : "GOOD EVENING") + " COMMANDER";
-    </script>
 </body>
 </html>
