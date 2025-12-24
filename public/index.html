@@ -492,5 +492,44 @@
         const hr = new Date().getHours();
         document.getElementById('greeting').innerText = (hr < 12 ? "GOOD MORNING" : hr < 18 ? "GOOD AFTERNOON" : "GOOD EVENING") + " COMMANDER";
     </script>
+    <script>
+    // URL Edge Config lu (Read-Only)
+    const EDGE_URL = "https://edge-config.vercel.com/ecfg_z7bxge6v6ifyatorgjilr8gfoc7m?token=4dee9e37-55cf-402b-a361-e6864c2f2b1e";
+
+    async function syncAdmin() {
+        try {
+            const response = await fetch(EDGE_URL);
+            const data = await response.json();
+
+            // 1. Logika Lock/Maintenance
+            const mt = document.getElementById('mt-screen');
+            if (data.maintenance === "on") {
+                mt.style.display = 'flex';
+            } else {
+                mt.style.display = 'none';
+            }
+
+            // 2. Logika Status Admin
+            if (data.admin_status) {
+                document.getElementById("admin-status").innerText = data.admin_status;
+            }
+
+            // 3. Logika Mode Brutal (Merah)
+            if (data.brutal_mode === "on") {
+                document.documentElement.style.setProperty('--primary', '#ff0000');
+                document.documentElement.style.setProperty('--glow', '#ff4d4d');
+            } else {
+                document.documentElement.style.setProperty('--primary', '#9d4edd');
+                document.documentElement.style.setProperty('--glow', '#c77dff');
+            }
+        } catch (e) {
+            console.log("Sync Error");
+        }
+    }
+
+    // Jalankan setiap 10 detik agar web update otomatis tanpa refresh
+    setInterval(syncAdmin, 10000);
+    syncAdmin(); 
+</script>
 </body>
 </html>
