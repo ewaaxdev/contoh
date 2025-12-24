@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>XDEV PROJECT V1 - NEKRO PURPLE</title>
+    <meta name="theme-color" content="#9D4EDD"
+    <title>XDEV PROJECT V1</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -18,9 +19,10 @@
             --success: #00ff88;
             --error: #ff4d4d;
             --neon-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+            /* CORE CLAMP VARIABLE INJECTED */
+            --nekro-fluid: clamp(20px, 4vw, 48px);
         }
 
-        /* 1-10: Base Abyss UI Logic */
         html, body {
             height: 100%; margin: 0; padding: 0;
             background-color: var(--dark);
@@ -29,7 +31,6 @@
             scroll-behavior: smooth;
         }
 
-        /* 11-20: Advanced Background Layering */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at 50% -20%, #240046 0%, #05010a 80%);
@@ -44,7 +45,6 @@
             mask-image: radial-gradient(ellipse at center, black, transparent 80%);
         }
 
-        /* 21-30: Interactivity & Security */
         * { 
             box-sizing: border-box; 
             -webkit-tap-highlight-color: transparent; 
@@ -59,22 +59,27 @@
             box-shadow: var(--neon-shadow);
         }
 
-        /* 31-40: Container & Header Shrink Logic */
         .container {
             width: 100%; max-width: 480px; margin: 0 auto;
             background: rgba(5, 1, 10, 0.7); backdrop-filter: blur(20px);
             min-height: 100vh; display: flex; flex-direction: column;
             border-left: 1px solid var(--border); border-right: 1px solid var(--border);
             position: relative;
+            align-items: center;
+            overflow: auto;
         }
 
         .header { 
-            padding: 80px 20px 40px; text-align: center; 
+            /* INJECTED CLAMP TO PADDING */
+            padding: var(--nekro-fluid) 20px clamp(15px, 3vw, 30px); 
+            text-align: center; 
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .profile-img {
-            width: 120px; height: 120px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            /* INJECTED CLAMP TO SIZE */
+            width: clamp(80px, 12vw, 120px); height: clamp(80px, 12vw, 120px); 
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             border: 2px solid var(--primary); padding: 5px;
             box-shadow: var(--neon-shadow);
             animation: morphing 8s infinite ease-in-out, glowPulse 3s infinite;
@@ -88,7 +93,6 @@
             100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         }
 
-        /* 41-50: Tabs & Buttons Evolution */
         .tabs-container { 
             position: sticky; top: 0; z-index: 100; padding: 12px; 
             background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(15px);
@@ -100,7 +104,10 @@
         .tab-btn { 
             flex: 1; padding: 12px 10px; border-radius: 12px;
             border: 1px solid var(--border); background: var(--glass);
-            color: #fff; font-weight: 700; font-size: 10px; white-space: nowrap;
+            color: #fff; font-weight: 700; 
+            /* INJECTED CLAMP TO FONT */
+            font-size: clamp(9px, 2vw, 12px); 
+            white-space: nowrap;
             transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
         }
 
@@ -110,14 +117,19 @@
             transform: scale(1.05);
         }
 
-        /* 51-60: Card Glitch & Hover Effects */
-        .content-section { padding: 20px; display: none; }
+        .content-section { 
+            /* INJECTED CLAMP TO PADDING */
+            padding: var(--nekro-fluid); 
+            display: none; 
+        }
         .content-section.active { display: block; animation: fadeInUp 0.4s both; }
 
         .item-card { 
             background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(157, 78, 221, 0.05));
             border: 1px solid var(--border); border-radius: 20px; 
-            padding: 20px; margin-bottom: 15px;
+            /* INJECTED CLAMP TO PADDING */
+            padding: var(--nekro-fluid); 
+            margin-bottom: 15px;
             display: flex; justify-content: space-between; align-items: center;
             transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative; overflow: hidden;
@@ -129,13 +141,18 @@
             background: rgba(157, 78, 221, 0.1);
         }
 
-        .item-card h3 { margin: 0; font-size: 15px; font-weight: 800; letter-spacing: 0.5px; }
+        .item-card h3 { 
+            margin: 0; 
+            /* INJECTED CLAMP TO FONT SIZE */
+            font-size: clamp(14px, 3.5vw, 20px); 
+            font-weight: 800; letter-spacing: 0.5px; 
+        }
+        
         .price { 
             color: var(--success); font-family: 'JetBrains Mono'; 
-            font-size: 13px; font-weight: 700;
+            font-size: clamp(11px, 2.5vw, 15px); font-weight: 700;
         }
 
-        /* 61-70: Advanced Notifications */
         #buyer-notif {
             position: fixed; top: 20px; right: 20px; 
             background: rgba(15, 2, 26, 0.95); border: 1px solid var(--primary);
@@ -144,11 +161,12 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
-        /* 71-80: Console Box Stream */
         .console-box { 
             background: #000; border-radius: 15px; padding: 15px; 
             font-family: 'JetBrains Mono'; font-size: 10px; border: 1px solid var(--border);
-            height: 160px; overflow-y: hidden; line-height: 1.8;
+            /* INJECTED CLAMP TO HEIGHT */
+            height: clamp(120px, 20vh, 180px); 
+            overflow-y: hidden; line-height: 1.8;
             position: relative;
         }
 
@@ -157,18 +175,20 @@
             background: linear-gradient(transparent, #000);
         }
 
-        /* 81-90: CTAs & Footer */
         .btn-wa { 
             background: linear-gradient(45deg, #25d366, #128c7e);
             display: flex; align-items: center; justify-content: center;
-            gap: 10px; padding: 18px; border-radius: 18px; color: #fff; 
-            text-decoration: none; font-weight: 800; font-size: 13px;
+            gap: 10px; 
+            /* INJECTED CLAMP TO PADDING */
+            padding: var(--nekro-fluid); 
+            border-radius: 18px; color: #fff; 
+            text-decoration: none; font-weight: 800; 
+            font-size: clamp(12px, 3vw, 16px);
             transition: 0.3s; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
         }
 
         .btn-wa:active { transform: scale(0.95); }
 
-        /* 91-100: Popup & Modal 3D Logic */
         .popup-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #05010a; z-index: 999999;
@@ -181,7 +201,6 @@
             max-width: 350px; box-shadow: 0 0 50px rgba(157, 78, 221, 0.2);
         }
 
-        /* Particles Rain */
         #particles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:-2; pointer-events:none; }
     </style>
 </head>
@@ -214,7 +233,7 @@
         <div class="header" id="mainHeader">
             <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" class="profile-img">
             <h1 style="margin: 15px 0 5px; font-size: 26px; font-weight: 800; background: linear-gradient(90deg, #fff, var(--glow), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">XDEV PROJECT V1</h1>
-            <p style="font-size: 10px; color: var(--glow); font-weight: 700; letter-spacing: 2px; opacity: 0.7;">ENCRYPTED FILE SERVICES</p>
+            <p style="font-size: 10px; color: var(--glow); font-weight: 700; letter-spacing: 2px; opacity: 0.7;">Menyediakan File Khusus Freefire</p>
         </div>
 
         <div class="tabs-container">
@@ -312,14 +331,12 @@
     </div>
 
     <script>
-        // Security Logic
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
                 return false;
             }
         };
 
-        // Console Logic
         const logs = [
             "Bypassing Anticheat...", "Fetching Shader IDs...", "Connection Stable", 
             "Injecting Memory Patch...", "User Authorized", "ZWrite Override: ON",
@@ -327,6 +344,7 @@
         ];
         setInterval(() => {
             const con = document.getElementById('console');
+            if(!con) return;
             const log = logs[Math.floor(Math.random()*logs.length)];
             const span = document.createElement('span');
             span.innerHTML = `<br><span style="color:#555">> [LOG] ${log}</span>`;
@@ -335,36 +353,24 @@
             con.scrollTop = con.scrollHeight;
         }, 2000);
 
-        // 105: BRUTAL FAKE BUYER ENGINE (CUSTOMIZED)
-        const fakeUsers = [
-            "Rafi", "Dimas", "Sultan_FF", "Ghost_Mod", "Anon_X", "Rian_Gamer", "Vina_Gils", "Bocil_Epep", 
-            "Gopal_FF", "Ezza_Savage", "Zaky_Modz", "Farel_Dev", "User_99", "Riichi", "X-Force", "Nexus", 
-            "Arip_Gans", "Dika_Slayer", "Tzy_Sky", "Lord_Holo", "Kanz_FF", "Mba_Selly", "Kuro_Net", "Saber_Void"
-        ];
-        
-        const allItems = [
-            "Holo Senjata", "Holo Bundle", "Holo Karakter", "Drag Headshot 100%", "Leher Headshot", 
-            "Dada Headshot", "Badan Headshot", "Magic Bullet", "Hapus Holo SS00", "Add Color Holo", 
-            "Change Color Holo", "Add Gambar Glowal", "Change Color Glowal"
-        ];
+        const fakeUsers = ["Rafi", "Dimas", "Sultan_FF", "Ghost_Mod", "Anon_X", "Rian_Gamer", "Vina_Gils", "Bocil_Epep", "Anakrantau12", "FauxzyMods", "AghaNL", "AshelForius", "Prabowo", "Bang brando"];
+        const allItems = ["Holo Senjata", "Holo Bundle", "Drag Headshot 100%", "Magic Bullet", "Hs Leher", "Holo Karakter", "Holo Support Smooth"];
 
         setInterval(() => {
             const notif = document.getElementById('buyer-notif');
+            if(!notif) return;
             const user = fakeUsers[Math.floor(Math.random()*fakeUsers.length)];
             const item = allItems[Math.floor(Math.random()*allItems.length)];
-            
             document.getElementById('notif-text').innerText = `${user} baru saja membeli ${item}`;
             notif.style.display = 'flex';
             notif.classList.remove('animate__fadeOutRight');
             notif.classList.add('animate__animated', 'animate__fadeInRight');
-            
             setTimeout(() => {
                 notif.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
                 setTimeout(() => { notif.style.display = 'none'; }, 500);
             }, 3500);
-        }, 8000); // Interval 8 detik agar terlihat ramai tapi tetap realistis
+        }, 8000);
 
-        // Header Scroll
         window.onscroll = function() {
             let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -409,7 +415,6 @@
             setTimeout(() => document.getElementById('welcomePopup').style.display='none', 500);
         }
 
-        // Particles Rain
         const canvas = document.getElementById('particles');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -438,7 +443,6 @@
         }
         anim();
 
-        // Greeting
         const hr = new Date().getHours();
         document.getElementById('greeting').innerText = (hr < 12 ? "GOOD MORNING" : hr < 18 ? "GOOD AFTERNOON" : "GOOD EVENING") + " COMMANDER";
     </script>
