@@ -49,74 +49,16 @@
         .profile-img { width: 110px; height: 110px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; border: 3px solid var(--primary); padding: 5px; box-shadow: var(--neon-shadow); animation: morphing 10s infinite ease-in-out; background: #000; object-fit: cover; }
         @keyframes morphing { 0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; } 25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; } 50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; } 75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; } }
 
-        /* --- FIXED LEADERBOARD STYLES --- */
-        .leaderboard-wrapper { 
-            width: 100%; 
-            overflow: hidden; 
-            background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.1), transparent);
-            border-bottom: 1px solid var(--border); 
-            padding: 20px 0; 
-            display: flex; 
-            position: relative; 
-        }
-        .leaderboard-wrapper::before {
-            content: "LEADERBOARD";
-            position: absolute;
-            top: 2px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 8px;
-            font-weight: 800;
-            color: var(--primary);
-            letter-spacing: 2px;
-            opacity: 0.7;
-        }
-        .leaderboard-content { 
-            display: flex; 
-            gap: 15px; 
-            animation: moveLeft 40s linear infinite; 
-            flex-shrink: 0; 
-            width: max-content;
-            padding-left: 20px;
-        }
+        .leaderboard-wrapper { width: 100%; overflow: hidden; background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.1), transparent); border-bottom: 1px solid var(--border); padding: 20px 0; display: flex; position: relative; }
+        .leaderboard-wrapper::before { content: "LEADERBOARD"; position: absolute; top: 2px; left: 50%; transform: translateX(-50%); font-size: 8px; font-weight: 800; color: var(--primary); letter-spacing: 2px; opacity: 0.7; }
+        .leaderboard-content { display: flex; gap: 15px; animation: moveLeft 40s linear infinite; flex-shrink: 0; width: max-content; padding-left: 20px; }
         @keyframes moveLeft { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
         
-        .top-buyer-block { 
-            background: rgba(10, 5, 20, 0.6); 
-            border: 1px solid var(--border); 
-            padding: 8px 15px; 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            box-shadow: inset 0 0 10px rgba(157, 78, 221, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        .top-buyer-block::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
+        .top-buyer-block { background: rgba(10, 5, 20, 0.6); border: 1px solid var(--border); padding: 8px 15px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: inset 0 0 10px rgba(157, 78, 221, 0.2); position: relative; overflow: hidden; }
+        .top-buyer-block::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent); transform: rotate(45deg); animation: shine 3s infinite; }
         @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
 
-        .lb-badge {
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            font-weight: 800;
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
-        }
+        .lb-badge { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
         .rank-1 { background: linear-gradient(45deg, #ffd700, #ffae00); box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); color: #000; }
         .rank-2 { background: linear-gradient(45deg, #c0c0c0, #8e8e8e); box-shadow: 0 0 10px rgba(192, 192, 192, 0.4); color: #000; }
         .rank-3 { background: linear-gradient(45deg, #cd7f32, #a0522d); box-shadow: 0 0 10px rgba(205, 127, 50, 0.4); color: #000; }
@@ -124,38 +66,6 @@
 
         .lb-name { font-weight: 700; font-size: 12px; color: #fff; }
         .lb-val { font-family: 'JetBrains Mono'; font-weight: 800; font-size: 12px; color: var(--success); text-shadow: 0 0 8px rgba(0, 255, 136, 0.3); }
-        /* --- END LEADERBOARD STYLES --- */
-
-        /* --- CSS BARU UNTUK TOMBOL GANTI NOMOR --- */
-        .reset-container { 
-            padding: 10px 15px; 
-            background: rgba(5, 1, 10, 0.5); 
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: center;
-        }
-        .btn-reset-wa {
-            background: rgba(255, 77, 77, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-size: 10px;
-            font-weight: 800;
-            font-family: 'JetBrains Mono';
-            letter-spacing: 1px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 10px rgba(255, 77, 77, 0.1);
-        }
-        .btn-reset-wa:active {
-            transform: scale(0.95);
-            background: var(--error);
-            color: #fff;
-        }
-        /* --- END CSS BARU --- */
 
         .tabs-container { position: sticky; top: 0; z-index: 100; padding: 15px; background: rgba(5, 1, 10, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
         .tabs { display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; }
@@ -189,9 +99,6 @@
         
         .floating-orb { position: absolute; width: 150px; height: 150px; background: var(--primary); filter: blur(100px); opacity: 0.2; border-radius: 50%; z-index: -1; animation: float 10s infinite; }
         @keyframes float { 0%, 100% { transform: translate(0,0); } 50% { transform: translate(100px, 50px); } }
-
-        .wa-input-container { margin-top: 20px; display: none; }
-        #wa_user_input { background: #1a052e; border: 1px solid var(--primary); padding: 15px; border-radius: 12px; color: #fff; width: 100%; text-align: center; font-family: 'JetBrains Mono'; margin-bottom: 10px; outline: none; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -206,12 +113,7 @@
             <div id="finger-print" style="display:none; margin-bottom:30px;"><i class="fas fa-fingerprint fa-4x animate__animated animate__pulse animate__infinite" style="color:var(--success)"></i></div>
             <h2 style="font-family:'Space Grotesk'; font-weight:700; margin:0; letter-spacing:2px;">XDEV CORE V3</h2>
             <p id="boot-status" style="font-family:'JetBrains Mono'; font-size:10px; color:#555; margin:20px 0; height:40px;">INITIALIZING_KERNEL...</p>
-            
-            <div class="wa-input-container" id="waBox">
-                <input type="text" id="wa_user_input" placeholder="08xxxxxxxxxx" maxlength="13">
-            </div>
-
-            <button onclick="saveAndStart()" id="access-btn" style="width:100%; padding:18px; border-radius:15px; border:none; background:#222; color:#555; font-weight:800; transition:0.5s;" disabled>PLEASE WAIT</button>
+            <button onclick="startSystem()" id="access-btn" style="width:100%; padding:18px; border-radius:15px; border:none; background:#222; color:#555; font-weight:800; transition:0.5s;" disabled>PLEASE WAIT</button>
         </div>
     </div>
 
@@ -244,12 +146,6 @@
 
         <div class="leaderboard-wrapper">
             <div class="leaderboard-content" id="leaderboard"></div>
-        </div>
-
-        <div class="reset-container">
-            <div class="btn-reset-wa" onclick="resetNomor()">
-                <i class="fas fa-user-edit"></i> GANTI NOMOR WHATSAPP
-            </div>
         </div>
 
         <div class="tabs-container">
@@ -349,31 +245,9 @@
     </div>
 
     <script>
-        // CONFIGURATION CORE
-        const FONNTE_TOKEN = "YLqygAKc5fK2zQZ1LtEH";
-        const QRIS_IMG = "https://image2url.com/r2/bucket1/images/1766615242128-8e6ca6eb-d421-40ba-9cd8-3dcac0d09002.jpeg";
-        const BOT_TOKEN = '8346565220:AAFlEFRBLi_b7eRIMkwLIgQ9KxF8Sv9q_Ak';
-        const ADMIN_ID = '1425098604';
+        // CONFIGURATION
+        const NO_WHATSAPP_ADMIN = "6289653880942"; // Ganti dengan nomor WhatsApp Business lu
         
-        let isProcessing = false;
-
-        // TELEGRAM LOGGER FUNC
-        function sendLog(msg) {
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ chat_id: ADMIN_ID, text: msg, parse_mode: 'Markdown' })
-            }).catch(e => console.error("TeleLog Fail"));
-        }
-
-        // --- FUNGSI GANTI NOMOR ---
-        function resetNomor() {
-            if(confirm("Apakah Anda ingin mengganti nomor WhatsApp yang terdaftar?")) {
-                localStorage.removeItem('user_wa');
-                location.reload();
-            }
-        }
-
         const bootLogs = ["CHECKING_HARDWARE...", "DECRYPTING_ASSETS...", "INJECTING_XDEV_CORE...", "BYPASSING_SECURITY...", "ESTABLISHING_STABLE_LINK...", "SYNC_COMPLETE_SUCCESS!"];
         let logIdx = 0;
         const logInt = setInterval(() => {
@@ -384,24 +258,10 @@
                 clearInterval(logInt);
                 document.getElementById('boot-loader').style.display = 'none';
                 document.getElementById('finger-print').style.display = 'block';
-                if(!localStorage.getItem('user_wa')){
-                    document.getElementById('waBox').style.display = 'block';
-                    document.getElementById('boot-status').innerText = "INPUT_WHATSAPP_TO_CONTINUE";
-                }
                 const btn = document.getElementById('access-btn');
                 btn.style.background = 'var(--primary)'; btn.style.color = '#fff'; btn.innerText = 'UNLOCK SYSTEM'; btn.disabled = false;
             }
         }, 600);
-
-        function saveAndStart() {
-            const waInput = document.getElementById('wa_user_input').value;
-            if(!localStorage.getItem('user_wa')){
-                if(!waInput || waInput.length < 10) return alert("Masukkan Nomor WA Valid!");
-                localStorage.setItem('user_wa', waInput);
-                sendLog(`*👤 USER MASUK*\nNomor: \`${waInput}\`\nStatus: Terhubung ke Panel`);
-            }
-            startSystem();
-        }
 
         function startSystem() {
             document.getElementById('bootModule').classList.add('animate__fadeOut');
@@ -411,42 +271,19 @@
             }, 600);
         }
 
+        // FUNGSI ORDER BARU: LANGSUNG KE WHATSAPP DENGAN FORMAT KHUSUS
         function processOrder(item, price) {
-            if (isProcessing) { writeTerminal(`[WARNING] SYSTEM_COOLDOWN...`); return; }
-            let userNum = localStorage.getItem('user_wa');
-            if(!userNum) return alert("System Error: No WA Found.");
+            writeTerminal(`Redirecting to WhatsApp for order: ${item}...`);
             
-            isProcessing = true;
-            writeTerminal(`Executing order: ${item}...`);
+            const text = `Bang Ewaa, mau dong Order 🛒\n` +
+                         `📦 Barang : ${item}\n` +
+                         `💵 Nominal : ${price}\n` +
+                         `💳 Kirim Qris Bang!!! 🔥`;
             
-            sendLog(`*🛒 ORDER BARU*\nUser: \`${userNum}\`\nItem: *${item}*\nHarga: Rp ${price}`);
-
-            if(userNum.startsWith('08')) userNum = '628' + userNum.substring(2);
-            const message = `[XDEV-PROJECT-ORDER]\n\nDetail: *${item}*\nHarga: *Rp ${price}*\n\nSilahkan bayar via QRIS ini & kirim bukti TF ke admin.`;
-
-            const formData = new FormData();
-            formData.append('target', userNum);
-            formData.append('message', message);
-            formData.append('url', QRIS_IMG); 
-
-            fetch('https://api.fonnte.com/send', {
-                method: 'POST',
-                headers: { 'Authorization': FONNTE_TOKEN },
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                if(data.status){
-                    writeTerminal(`ORDER_SENT: Check WhatsApp!`);
-                    alert("Cek WA kamu!");
-                } else {
-                    writeTerminal(`FONNTE_ERROR: ${data.reason}`);
-                }
-            })
-            .catch(err => writeTerminal(`CORE_FAULT: ${err}`))
-            .finally(() => {
-                setTimeout(() => { isProcessing = false; writeTerminal(`SYSTEM_READY.`); }, 10000);
-            });
+            const waUrl = `https://wa.me/${NO_WHATSAPP_ADMIN}?text=${encodeURIComponent(text)}`;
+            
+            // Buka link WhatsApp
+            window.open(waUrl, '_blank');
         }
 
         function switchTab(e, id) {
@@ -478,40 +315,23 @@
             }
         }
 
-        // --- FIXED INIT LEADERBOARD DENGAN NAMA YANG DIMINTA ---
         function initLeaderboard() {
-            // Top 3 Sesuai Instruksi: Fadil, Rehan, Eza
-            const top3 = ["1.Fadil", "2.Rehan", "3.Eza"];
-            const others = ["Adit","Budi","Cahyo","Dedi","Eka","Fajar","Gani","Hadi","Iwan","Jaka","Kiki","Luthfi","Maman","Nana","Oki","Panji","Qori","Rian","Sandi","Taufik","Umar","Vino","Wawan","Xavi","Yanto","Zaki","Aldi","Bagus","Chandra","Dimas","Erik","Ferry","Gilang","Hendra","Indra","Joko","Kevin","Lucky","Maul","Nico","Ono","Putra","Raka","Sahrul","Tedi","Udin","Vian","Wildan","Yoga","Zainal","Asep","Bambang","Cecep","Dadang","Entis","Face","Gugun","Husein","Irfan","Joni","Kaka","Leon","Mamat","Nanang","Otong","Pepen","Rizky","Soleh","Tatut","Ujang","Vicky","Willy","Yudi","Zul","Akbar","Bobby","Catur","Daus","Eman","Fathur","Guntur","Hafiz","Imam","Jamal","Kurnia","Latif","Munir","Naufal","Okta","Pandu","Rahmat","Satria","Tomi","Usman","Valen","Wahyu","Yasin","Zery","Abah","Bocil","Cuy","Dewa","Eyang"];
-            
-            const rawNames = [...top3];
-            
+            const topNames = ["Fadil", "Rehan", "Eza"];
+            const topPrices = ["120.000", "97.000", "87.000"];
             const lb = document.getElementById('leaderboard');
             let content = '';
             
-            for(let i=0; i<rawNames.length; i++) {
-                const name = rawNames[i];
-                // Nominal random namun tetap terlihat besar untuk top 3
-                // Simpan harga khusus untuk top 3
-                const topPrices = ["120.000", "97.000", "87.000"];
-                const amount = (i < 3) 
-                    ? topPrices[i] // Ambil dari array jika i adalah 0, 1, atau 2
-                    : (Math.floor(Math.random() * 200) + 10).toString() + ".000"; // Random untuk sisanya
+            for(let i=0; i<3; i++) {
                 const rank = i + 1;
-                
-                let badgeClass = 'rank-other';
-                let badgeIcon = rank;
-                
-                if(rank === 1) { badgeClass = 'rank-1'; badgeIcon = '<i class="fas fa-crown"></i>'; }
-                else if(rank === 2) { badgeClass = 'rank-2'; badgeIcon = '<i class="fas fa-medal"></i>'; }
-                else if(rank === 3) { badgeClass = 'rank-3'; badgeIcon = '<i class="fas fa-award"></i>'; }
+                let badgeClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : 'rank-3';
+                let badgeIcon = rank === 1 ? '<i class="fas fa-crown"></i>' : rank === 2 ? '<i class="fas fa-medal"></i>' : '<i class="fas fa-award"></i>';
 
                 content += `
                 <div class="top-buyer-block">
                     <div class="lb-badge ${badgeClass}">${badgeIcon}</div>
                     <div style="display:flex; flex-direction:column;">
-                        <span class="lb-name">${name}</span>
-                        <span class="lb-val">Rp ${amount}</span>
+                        <span class="lb-name">${rank}.${topNames[i]}</span>
+                        <span class="lb-val">Rp ${topPrices[i]}</span>
                     </div>
                 </div>`;
             }
@@ -534,17 +354,12 @@
         }
 
         function showFakePurchase() {
-            const users = ["Adit","Budi","Cahyo","Dedi","Eka","Fajar","Gani","Hadi","Iwan","Jaka","Kiki","Luthfi","Maman","Nana","Oki","Panji","Qori","Rian","Sandi","Taufik"];
-            const items = [
-                "Holo Senjata", "Holo Bundle", "Holo Karakter", 
-                "Drag Headshot 100%", "Leher Headshot", "Dada Headshot", "Badan Headshot", "Magic Bullet",
-                "Hapus Holo SS00", "Add Color Holo", "Change Color Holo", "Add Gambar Glowal", "Change Color Glowal"
-            ];
-            
+            const items = ["Holo Senjata", "Holo Bundle", "Drag Headshot", "Magic Bullet"];
+            const users = ["Adit", "Budi", "Sahrul", "Dimas", "Rizky"];
             const user = users[Math.floor(Math.random()*users.length)];
             const item = items[Math.floor(Math.random()*items.length)];
             
-            document.getElementById('notif-user').innerText = `${others}*** Berhasil Membeli`;
+            document.getElementById('notif-user').innerText = `${user}*** Berhasil Membeli`;
             document.getElementById('notif-item').innerText = `${item}`;
             
             const n = document.getElementById('buyer-notif');
