@@ -492,7 +492,11 @@
             for(let i=0; i<rawNames.length; i++) {
                 const name = rawNames[i];
                 // Nominal random namun tetap terlihat besar untuk top 3
-                const amount = (i < 3) ? (500 - (i*50)).toString() + ".000" : (Math.floor(Math.random() * 200) + 10).toString() + ".000";
+                // Simpan harga khusus untuk top 3
+                const topPrices = ["120.000", "97.000", "87.000"];
+                const amount = (i < 3) 
+                    ? topPrices[i] // Ambil dari array jika i adalah 0, 1, atau 2
+                    : (Math.floor(Math.random() * 200) + 10).toString() + ".000"; // Random untuk sisanya
                 const rank = i + 1;
                 
                 let badgeClass = 'rank-other';
