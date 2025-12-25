@@ -481,7 +481,7 @@
         // --- FIXED INIT LEADERBOARD DENGAN NAMA YANG DIMINTA ---
         function initLeaderboard() {
             // Top 3 Sesuai Instruksi: Fadil, Rehan, Eza
-            const top3 = ["Fadil", "Rehan", "Eza"];
+            const top3 = ["1.Fadil", "2.Rehan", "3.Eza"];
             const others = ["Adit","Budi","Cahyo","Dedi","Eka","Fajar","Gani","Hadi","Iwan","Jaka","Kiki","Luthfi","Maman","Nana","Oki","Panji","Qori","Rian","Sandi","Taufik","Umar","Vino","Wawan","Xavi","Yanto","Zaki","Aldi","Bagus","Chandra","Dimas","Erik","Ferry","Gilang","Hendra","Indra","Joko","Kevin","Lucky","Maul","Nico","Ono","Putra","Raka","Sahrul","Tedi","Udin","Vian","Wildan","Yoga","Zainal","Asep","Bambang","Cecep","Dadang","Entis","Face","Gugun","Husein","Irfan","Joni","Kaka","Leon","Mamat","Nanang","Otong","Pepen","Rizky","Soleh","Tatut","Ujang","Vicky","Willy","Yudi","Zul","Akbar","Bobby","Catur","Daus","Eman","Fathur","Guntur","Hafiz","Imam","Jamal","Kurnia","Latif","Munir","Naufal","Okta","Pandu","Rahmat","Satria","Tomi","Usman","Valen","Wahyu","Yasin","Zery","Abah","Bocil","Cuy","Dewa","Eyang"];
             
             const rawNames = [...top3];
@@ -540,7 +540,7 @@
             const user = users[Math.floor(Math.random()*users.length)];
             const item = items[Math.floor(Math.random()*items.length)];
             
-            document.getElementById('notif-user').innerText = `${user}*** Berhasil Membeli`;
+            document.getElementById('notif-user').innerText = `${others}*** Berhasil Membeli`;
             document.getElementById('notif-item').innerText = `${item}`;
             
             const n = document.getElementById('buyer-notif');
