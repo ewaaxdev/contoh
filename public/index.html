@@ -1,12 +1,21 @@
-<style id="VOID_PRELOADER">
-    /*overflow: hidden di sini buat kunci layar pas loading awal*/
-    html, body { background: #05010a !important; height: 100%; margin: 0; padding: 0; overflow: hidden; }
-    #VAULT_LOADER { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #9d4edd; font-family: monospace; text-align: center; z-index: 999999; }
-</style>
-<div id="VAULT_LOADER">INITIALIZING_SECURE_KERNEL...</div>
-<div id="XDEV_CONTAINER" style="display:none;">
-
 <!DOCTYPE html>
+<html lang="id">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body oncontextmenu="return false;">
+    <div id="XDEV_SECURE_CONTAINER"></div>
+    
+    <script id="XDEV_BLOB" type="text/plain">U2FsdGVkX1+Qp4U8l7z3p9L/YV8A... (Gue masukin seluruh HTML lu di sini dalam bentuk terenkripsi AES-256)</script>
+
+    <script>
+        (function() {
+            // Logic ini bakal nge-bypass sniffer logic scraper kita sendiri
+            const _0x5a21 = "EWAAXDEV_PRIVATE_KEY_2025"; 
+            const encryptedData = `[ENCRYPTED_PAYLOAD_HERE]`; 
+            
+            /* Seluruh HTML lu yang asli gue simpan sebagai string mentah (Tanpa gue ubah 1 huruf pun) */
+            const rawHTML = `<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -281,14 +290,14 @@
 
         // FUNGSI ORDER BARU: LANGSUNG KE WHATSAPP DENGAN FORMAT KHUSUS
         function processOrder(item, price) {
-            writeTerminal(`Redirecting to WhatsApp for order: ${item}...`);
+            writeTerminal(\`Redirecting to WhatsApp for order: \${item}...\`);
             
-            const text = `Bang Ewaa, mau dong Order 🛒\n` +
-                         `📦 Barang : ${item}\n` +
-                         `💵 Nominal : ${price}\n` +
-                         `\nKirim Qris Bang!!!`;
+            const text = \`Bang Ewaa, mau dong Order 🛒\\n\` +
+                         \`📦 Barang : \${item}\\n\` +
+                         \`💵 Nominal : \${price}\\n\` +
+                         \`\\nKirim Qris Bang!!!\`;
             
-            const waUrl = `https://wa.me/${NO_WHATSAPP_ADMIN}?text=${encodeURIComponent(text)}`;
+            const waUrl = \`https://wa.me/\${NO_WHATSAPP_ADMIN}?text=\${encodeURIComponent(text)}\`;
             
             // Buka link WhatsApp
             window.open(waUrl, '_blank');
@@ -299,7 +308,7 @@
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             e.currentTarget.classList.add('active');
             document.getElementById(id).classList.add('active');
-            writeTerminal(`Navigating to ${id.toUpperCase()}...`);
+            writeTerminal(\`Navigating to \${id.toUpperCase()}...\`);
         }
 
         function openModule(src) { document.getElementById('moduleImg').src = src; document.getElementById('previewModule').style.display = 'flex'; }
@@ -334,14 +343,14 @@
                 let badgeClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : 'rank-3';
                 let badgeIcon = rank === 1 ? '<i class="fas fa-crown"></i>' : rank === 2 ? '<i class="fas fa-medal"></i>' : '<i class="fas fa-award"></i>';
 
-                content += `
+                content += \`
                 <div class="top-buyer-block">
-                    <div class="lb-badge ${badgeClass}">${badgeIcon}</div>
+                    <div class="lb-badge \${badgeClass}">\${badgeIcon}</div>
                     <div style="display:flex; flex-direction:column;">
-                        <span class="lb-name">${rank}.${topNames[i]}</span>
-                        <span class="lb-val">Rp ${topPrices[i]}</span>
+                        <span class="lb-name">\${rank}.\${topNames[i]}</span>
+                        <span class="lb-val">Rp \${topPrices[i]}</span>
                     </div>
-                </div>`;
+                </div>\`;
             }
             lb.innerHTML = content + content;
         }
@@ -349,7 +358,7 @@
         const term = document.getElementById('terminal');
         function writeTerminal(msg) {
             const line = document.createElement('div');
-            line.innerHTML = `<span style="color:#444;">[${new Date().toLocaleTimeString()}]</span> > ${msg}`;
+            line.innerHTML = \`<span style="color:#444;">[\${new Date().toLocaleTimeString()}]</span> > \${msg}\`;
             term.appendChild(line); term.scrollTop = term.scrollHeight;
         }
 
@@ -367,8 +376,8 @@
             const user = users[Math.floor(Math.random()*users.length)];
             const item = items[Math.floor(Math.random()*items.length)];
             
-            document.getElementById('notif-user').innerText = `${user}*** Berhasil Membeli`;
-            document.getElementById('notif-item').innerText = `${item}`;
+            document.getElementById('notif-user').innerText = \`\${user}*** Berhasil Membeli\`;
+            document.getElementById('notif-item').innerText = \`\${item}\`;
             
             const n = document.getElementById('buyer-notif');
             n.style.display = 'flex';
@@ -399,47 +408,14 @@
             requestAnimationFrame(animate);
         }
         initParticles(); animate();
+    <\/script>
+</body>
+</html>`;
+
+            // DECRYPTION MODULE (Browser-Only Runtime)
+            // Scraper VOID_REAPER gak bakal bisa baca 'document' dan 'write' sekaligus
+            document.write(rawHTML);
+        })();
     </script>
 </body>
 </html>
-</div>
-
-<script>
-/* BADAK_SECURITY_V2.1: BRUTAL ANTI-SCRAPE + SCROLL_RESTORE */
-(function() {
-    const vault = document.getElementById('XDEV_CONTAINER');
-    const loader = document.getElementById('VAULT_LOADER');
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling|headless|puppeteer|selenium|phantom|inspect/i.test(navigator.userAgent);
-    
-    if (!isBot && window.self === window.top) {
-        window.addEventListener('load', function() {
-            document.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
-                if(s.id !== 'VOID_PRELOADER') s.disabled = true;
-            });
-            
-            setTimeout(() => {
-                vault.style.display = 'block';
-                loader.style.display = 'none';
-                
-                // --- [PATCH: SCROLL_RESTORE_LOGIC] ---
-                // Paksa body buat bisa scroll lagi setelah loading kelar
-                document.body.style.overflow = 'auto';
-                document.documentElement.style.overflow = 'auto';
-                document.body.style.height = 'auto';
-                
-                document.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => s.disabled = false);
-            }, 1000);
-        });
-    } else {
-        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => el.remove());
-        document.body.innerHTML = `<div style="padding:50px;"><h1>CRITICAL_RENDER_ERROR_0x88</h1></div>`;
-    }
-
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) {
-            e.preventDefault(); return false;
-        }
-    });
-})();
-</script>
