@@ -1,10 +1,10 @@
-<style id="TITAN_LOCK">html { display: none !important; }</style>
-<script>
-    if (window.self === window.top) {
-        document.documentElement.style.display = 'block';
-        setTimeout(() => { if(document.getElementById('TITAN_LOCK')) document.getElementById('TITAN_LOCK').remove(); }, 1);
-    }
-</script>
+<style id="VOID_PRELOADER">
+    /*overflow: hidden di sini buat kunci layar pas loading awal*/
+    html, body { background: #05010a !important; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+    #VAULT_LOADER { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #9d4edd; font-family: monospace; text-align: center; z-index: 999999; }
+</style>
+<div id="VAULT_LOADER">INITIALIZING_SECURE_KERNEL...</div>
+<div id="XDEV_CONTAINER" style="display:none;">
 
 <!DOCTYPE html>
 <html lang="id">
@@ -402,29 +402,44 @@
     </script>
 </body>
 </html>
+</div>
+
 <script>
-    (function() {
-        const isHeadless = /HeadlessChrome|puppeteer|bot|spider|crawler/i.test(navigator.userAgent);
-        const isFrame = window.self !== window.top;
-        
-        if (isHeadless || isFrame || !navigator.onLine) {
-            // Hancurkan semua style jika dideteksi bot/save-as
-            document.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => el.remove());
-            document.body.innerHTML = `
-                <div style="background:white; color:red; padding:50px; font-family:monospace;">
-                    <h1>SYSTEM_CRITICAL_ERROR</h1>
-                    <p>Unauthorized Scraping / Save-As Detected.</p>
-                    <p>CSS_KEY_MISMATCH: styles.corrupt</p>
-                </div>
-            `;
-        }
-        
-        // Disable CTRL+U, CTRL+S, F12
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 's' || e.key === 'u' || e.key === 'i' || e.key === 'j' || e.key === 'c')) {
-                e.preventDefault();
-                return false;
-            }
+/* BADAK_SECURITY_V2.1: BRUTAL ANTI-SCRAPE + SCROLL_RESTORE */
+(function() {
+    const vault = document.getElementById('XDEV_CONTAINER');
+    const loader = document.getElementById('VAULT_LOADER');
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|headless|puppeteer|selenium|phantom|inspect/i.test(navigator.userAgent);
+    
+    if (!isBot && window.self === window.top) {
+        window.addEventListener('load', function() {
+            document.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => {
+                if(s.id !== 'VOID_PRELOADER') s.disabled = true;
+            });
+            
+            setTimeout(() => {
+                vault.style.display = 'block';
+                loader.style.display = 'none';
+                
+                // --- [PATCH: SCROLL_RESTORE_LOGIC] ---
+                // Paksa body buat bisa scroll lagi setelah loading kelar
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+                document.body.style.height = 'auto';
+                
+                document.querySelectorAll('style, link[rel="stylesheet"]').forEach(s => s.disabled = false);
+            }, 1000);
         });
-    })();
+    } else {
+        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => el.remove());
+        document.body.innerHTML = `<div style="padding:50px;"><h1>CRITICAL_RENDER_ERROR_0x88</h1></div>`;
+    }
+
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && (e.keyCode == 85 || e.keyCode == 83))) {
+            e.preventDefault(); return false;
+        }
+    });
+})();
 </script>
