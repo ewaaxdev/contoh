@@ -63,7 +63,9 @@
         .blink { animation: blinker 1.5s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
-        .profile-img { width: 110px; height: 110px; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; border: 3px solid var(--primary); padding: 5px; box-shadow: var(--neon-shadow); animation: morphing 10s infinite ease-in-out; background: #000; object-fit: cover; }
+        /* MODIFIKASI: LINGKARAN DIAM DAN RADIUS FIX */
+        .profile-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--primary); padding: 5px; box-shadow: var(--neon-shadow); background: #000; object-fit: cover; }
+        
         @keyframes morphing { 0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; } 25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; } 50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; } 75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; } }
 
         .leaderboard-wrapper { width: 100%; overflow: hidden; background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.1), transparent); border-bottom: 1px solid var(--border); padding: 20px 0; display: flex; position: relative; }
@@ -151,7 +153,7 @@
 
             <div style="position:relative; width:fit-content; margin:0 auto;">
                 <div class="floating-orb"></div>
-                <img src="https://image2url.com/images/1765305774150-25f602d5-af57-43f3-9326-6ee9b08d014d.png" class="profile-img">
+                <img src="https://i.ibb.co.com/0pR5R4qr/Picsart-26-01-05-15-28-37-774.png" class="profile-img">
             </div>
             
             <h1 style="font-family:'Space Grotesk'; font-size:28px; font-weight:800; margin:20px 0 5px; background: linear-gradient(to bottom, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">XDEV PROJECT V1</h1>
