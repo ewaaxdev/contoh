@@ -210,10 +210,37 @@
                 <img src="https://i.ibb.co.com/0pR5R4qr/Picsart-26-01-05-15-28-37-774.png" class="profile-img">
             </div>
             
-            <h1 style="font-family:'Space Grotesk'; font-size:28px; font-weight:800; margin:20px 0 5px; background: linear-gradient(to bottom, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">XDEV PROJECT V1</h1>
+            <style>
+.rgb-title {
+  position: relative;
+  font-family:'Space Grotesk';
+  font-size:28px;
+  font-weight:900;
+  margin:20px 0 5px;
+  color:#ffffff;
+}
+
+.rgb-title::before {
+  content: attr(data-text);
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  animation: rgbGlow 3s linear infinite;
+}
+
+@keyframes rgbGlow {
+  0% { text-shadow:0 0 8px #ff00ff,0 0 16px #00ffff; }
+  50%{ text-shadow:0 0 8px #00ff00,0 0 16px #ff00ff; }
+  100%{ text-shadow:0 0 8px #ff00ff,0 0 16px #00ffff; }
+}
+</style>
+
+<h1 class="rgb-title" data-text="EWAAXDEV MODS">
+EWAAXDEV MODS
+</h1>
             <div style="display:flex; justify-content:center; gap:8px; margin-bottom: 5px;">
-                <span style="font-size: 8px; padding: 2px 8px; background: rgba(157,78,221,0.2); border-radius: 5px; color: var(--glow); border: 1px solid var(--border);">HOLOGRAM_DEVELOPER</span>
-                <span style="font-size: 8px; padding: 2px 8px; background: rgba(0,255,136,0.1); border-radius: 5px; color: var(--success); border: 1px solid rgba(0,255,136,0.2);">SAFE MAIN ID</span>
+                <span style="font-size: 8px; padding: 2px 8px; background: rgba(157,78,221,0.2); border-radius: 5px; color: var(--glow); border: 1px solid var(--border);">DEBUGGER</span>
+                <span style="font-size: 8px; padding: 2px 8px; background: rgba(0,255,136,0.1); border-radius: 5px; color: var(--success); border: 1px solid rgba(0,255,136,0.2);">DEVELOPER</span>
             </div>
         </div>
 
@@ -324,7 +351,7 @@
     <script>
         const NO_WHATSAPP_ADMIN = "6289653880942";
         const bootLogs = ["▰ ▱ ▱ ▱ ▱ ▱", "▱ ▰ ▱ ▱ ▱ ▱", "▱ ▱ ▰ ▱ ▱ ▱", "▱ ▱ ▱ ▰ ▱ ▱", "▱ ▱ ▱ ▱ ▰ ▱", "▱ ▱ ▱ ▱ ▱ ▰", "▰ ▱ ▱ ▱ ▱ ▱", "𝗠𝗢𝗛𝗢𝗡 𝗧𝗘𝗞𝗔𝗡 𝗧𝗢𝗠𝗕𝗢𝗟 𝗩𝗘𝗥𝗜𝗙𝗜𝗞𝗔𝗦𝗜"];
-        let logIdx = 0;
+        let logIdx = 7;
         const logInt = setInterval(() => {
             const statusBox = document.getElementById('boot-status');
             if(statusBox && logIdx < bootLogs.length){
