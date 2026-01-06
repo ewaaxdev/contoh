@@ -5,17 +5,21 @@
 </head>
 <body oncontextmenu="return false;">
     <div id="XDEV_SECURE_CONTAINER"></div>
-    
-    <script id="XDEV_BLOB" type="text/plain">U2FsdGVkX1+Qp4U8l7z3p9L/YV8A... (Gue masukin seluruh HTML lu di sini dalam bentuk terenkripsi AES-256)</script>
+
+    <script id="XDEV_BLOB" type="text/plain">
+        U2FsdGVkX1+Qp4U8l7z3p9L/YV8A...
+    </script>
 
     <script>
-        (function() {
-            // Logic ini bakal nge-bypass sniffer logic scraper kita sendiri
-            const _0x5a21 = "EWAAXDEV_PRIVATE_KEY_2025"; 
-            const encryptedData = `[ENCRYPTED_PAYLOAD_HERE]`; 
-            
-            /* Seluruh HTML lu yang asli gue simpan sebagai string mentah (Tanpa gue ubah 1 huruf pun) */
-            const rawHTML = `<!DOCTYPE html>
+    (function() {
+
+        const _0x5a21 = "EWAAXDEV_PRIVATE_KEY_2025";
+        const encryptedData = `[ENCRYPTED_PAYLOAD_HERE]`;
+
+        /* ============================
+           RAW HTML ASLI (TIDAK DIUBAH)
+           ============================ */
+        const rawHTML = `<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -63,41 +67,30 @@
         .blink { animation: blinker 1.5s linear infinite; }
         @keyframes blinker { 50% { opacity: 0; } }
 
+        #boot-phase {
+          margin-top: 6px;
+          font-size: 12px;
+          letter-spacing: 1.2px;
+          opacity: .9;
+          color: #caffea;
+          text-shadow: 0 0 6px rgba(34,197,94,.5);
+        }
+
         .profile-img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%; /* bulat sempurna */
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #9b5cff;
+            background: #000;
+            object-fit: cover;
+            box-shadow: 0 0 8px rgba(155, 92, 255, 0.6), 0 0 18px rgba(155, 92, 255, 0.45), 0 0 32px rgba(0, 255, 170, 0.35), inset 0 0 6px rgba(155, 92, 255, 0.5);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
 
-    /* Outline ungu */
-    border: 3px solid #9b5cff;
-
-    /* Background fallback */
-    background: #000;
-
-    /* Image handling */
-    object-fit: cover;
-
-    /* Glow gradasi ungu → hijau */
-    box-shadow:
-        0 0 8px rgba(155, 92, 255, 0.6),     /* ungu soft */
-        0 0 18px rgba(155, 92, 255, 0.45),   /* ungu glow */
-        0 0 32px rgba(0, 255, 170, 0.35),    /* hijau neon */
-        inset 0 0 6px rgba(155, 92, 255, 0.5); /* inner glow */
-
-    transition: 
-        box-shadow 0.3s ease,
-        transform 0.3s ease;
-}
-
-/* Optional: hover biar makin hidup */
-.profile-img:hover {
-    transform: scale(1.04);
-    box-shadow:
-        0 0 12px rgba(155, 92, 255, 0.8),
-        0 0 26px rgba(155, 92, 255, 0.6),
-        0 0 48px rgba(0, 255, 170, 0.5),
-        inset 0 0 10px rgba(0, 255, 170, 0.6);
-}
+        .profile-img:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 12px rgba(155, 92, 255, 0.8), 0 0 26px rgba(155, 92, 255, 0.6), 0 0 48px rgba(0, 255, 170, 0.5), inset 0 0 10px rgba(0, 255, 170, 0.6);
+        }
 
         .leaderboard-wrapper { width: 100%; overflow: hidden; background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.1), transparent); border-bottom: 1px solid var(--border); padding: 20px 0; display: flex; position: relative; }
         .leaderboard-wrapper::before { content: "LEADERBOARD"; position: absolute; top: 2px; left: 50%; transform: translateX(-50%); font-size: 8px; font-weight: 800; color: var(--primary); letter-spacing: 2px; opacity: 0.7; }
@@ -137,7 +130,34 @@
         .line-green { color: var(--success); }
         .line-purple { color: var(--primary); }
 
-        #buyer-notif { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 350px; background: rgba(10, 5, 20, 0.95); border: 1px solid var(--primary); padding: 15px; border-radius: 18px; z-index: 10002; display: none; align-items: center; gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        #buyer-notif { 
+    position: fixed; 
+    /* PINDAH KE ATAS DENGAN SAFETY OFFSET */
+    top: 15px; 
+    bottom: auto; 
+    /* KUNCI PRESISI TENAH */
+    left: 50%; 
+    transform: translateX(-50%); 
+    /* RESPONSIVE WIDTH DENGAN LIMITER */
+    width: calc(100% - 40px); 
+    max-width: 360px; 
+    /* TAMPILAN CYBER */
+    background: rgba(10, 5, 20, 0.98); 
+    border: 1px solid var(--primary); 
+    padding: 10px 15px; 
+    border-radius: 18px; 
+    z-index: 10000000; /* Prioritas di atas HUD */
+    display: none; 
+    align-items: center; 
+    gap: 12px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9), 0 0 15px rgba(157, 78, 221, 0.3);
+    backdrop-filter: blur(15px);
+    /* MENGHINDARI PERGESERAN KARENA PADDING */
+    box-sizing: border-box; 
+}
+
+
+
 
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark); z-index: 999999; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .module-window { background: #0f021a; border: 1px solid var(--primary); border-radius: 35px; width: 100%; max-width: 360px; padding: 40px 30px; text-align: center; }
@@ -159,10 +179,13 @@
 
     <div class="popup-overlay" id="bootModule">
         <div class="module-window animate__animated animate__zoomIn">
-            <div id="boot-loader" style="margin-bottom:30px;"><i class="fas fa-microchip fa-spin fa-4x" style="color:var(--primary)"></i></div>
+            <div id="boot-loader" style="margin-bottom:30px;"><i class="fas fa-microchip fa-4x" style="color:var(--primary)"></i></div>
+            <pre id="boot-status" style="font-family:'JetBrains Mono'; font-size:10px; color:#555; margin:20px 0; height:40px;"></pre>
             <div id="finger-print" style="display:none; margin-bottom:30px;"><i class="fas fa-fingerprint fa-4x animate__animated animate__pulse animate__infinite" style="color:var(--success)"></i></div>
-            <h2 style="font-family:'Space Grotesk'; font-weight:700; margin:0; letter-spacing:2px;">XDEV CORE V3</h2>
-            <p id="boot-status" style="font-family:'JetBrains Mono'; font-size:10px; color:#555; margin:20px 0; height:40px;">INITIALIZING_KERNEL...</p>
+            <h2 style="font-family:'Space Grotesk'; font-weight:700; margin:0; letter-spacing:2px;">WAIT FOR VERIFY</h2>
+            <div id="boot-phase">ᴊɪᴋᴀ ᴀɴᴅᴀ ʙᴜᴋᴀɴ ʙᴏᴛ</div>
+            <div id="boot-phase">ᴛᴇᴋᴀɴ ᴛᴏᴍʙᴏʟ ᴜɴᴛᴜᴋ ᴠᴇʀɪғɪᴋᴀsɪ</div>
+            <div id="boot-phase">ㅤ</div>
             <button onclick="startSystem()" id="access-btn" style="width:100%; padding:18px; border-radius:15px; border:none; background:#222; color:#555; font-weight:800; transition:0.5s;" disabled>PLEASE WAIT</button>
         </div>
     </div>
@@ -295,44 +318,40 @@
     </div>
 
     <script>
-        // CONFIGURATION
-        const NO_WHATSAPP_ADMIN = "6289653880942"; // Ganti dengan nomor WhatsApp Business lu
-        
-        const bootLogs = ["CHECKING_HARDWARE...", "DECRYPTING_ASSETS...", "INJECTING_XDEV_CORE...", "BYPASSING_SECURITY...", "ESTABLISHING_STABLE_LINK...", "SYNC_COMPLETE_SUCCESS!"];
+        const NO_WHATSAPP_ADMIN = "6289653880942";
+        const bootLogs = ["▰ ▱ ▱ ▱ ▱ ▱", "▱ ▰ ▱ ▱ ▱ ▱", "▱ ▱ ▰ ▱ ▱ ▱", "▱ ▱ ▱ ▰ ▱ ▱", "▱ ▱ ▱ ▱ ▰ ▱", "▱ ▱ ▱ ▱ ▱ ▰", "▰ ▱ ▱ ▱ ▱ ▱", "𝗠𝗢𝗛𝗢𝗡 𝗧𝗘𝗞𝗔𝗡 𝗧𝗢𝗠𝗕𝗢𝗟 𝗩𝗘𝗥𝗜𝗙𝗜𝗞𝗔𝗦𝗜"];
         let logIdx = 0;
         const logInt = setInterval(() => {
-            if(logIdx < bootLogs.length){
-                document.getElementById('boot-status').innerText = bootLogs[logIdx];
+            const statusBox = document.getElementById('boot-status');
+            if(statusBox && logIdx < bootLogs.length){
+                statusBox.innerText = bootLogs[logIdx];
                 logIdx++;
-            } else {
+            } else if(logIdx >= bootLogs.length) {
                 clearInterval(logInt);
-                document.getElementById('boot-loader').style.display = 'none';
-                document.getElementById('finger-print').style.display = 'block';
+                const loader = document.getElementById('boot-loader');
+                const finger = document.getElementById('finger-print');
                 const btn = document.getElementById('access-btn');
-                btn.style.background = 'var(--primary)'; btn.style.color = '#fff'; btn.innerText = 'UNLOCK SYSTEM'; btn.disabled = false;
+                if(loader) loader.style.display = 'none';
+                if(finger) finger.style.display = 'block';
+                if(btn) { btn.style.background = 'var(--primary)'; btn.style.color = '#fff'; btn.innerText = 'VERIFY NOW!'; btn.disabled = false; }
             }
         }, 600);
 
         function startSystem() {
-            document.getElementById('bootModule').classList.add('animate__fadeOut');
-            setTimeout(() => {
-                document.getElementById('bootModule').style.display = 'none';
-                initHUD(); initLeaderboard(); autoLog();
-            }, 600);
+            const boot = document.getElementById('bootModule');
+            if(boot) {
+                boot.classList.add('animate__fadeOut');
+                setTimeout(() => {
+                    boot.style.display = 'none';
+                    initHUD(); initLeaderboard(); autoLog();
+                }, 600);
+            }
         }
 
-        // FUNGSI ORDER BARU: LANGSUNG KE WHATSAPP DENGAN FORMAT KHUSUS
         function processOrder(item, price) {
             writeTerminal(\`Redirecting to WhatsApp for order: \${item}...\`);
-            
-            const text = \`Bang Ewaa, mau dong Order 🛒\\n\` +
-                         \`📦 Barang : \${item}\\n\` +
-                         \`💵 Nominal : \${price}\\n\` +
-                         \`\\nKirim Qris Bang!!!\`;
-            
+            const text = \`Bang Ewaa, mau dong Order 🛒\\n\` + \`📦 Barang : \${item}\\n\` + \`💵 Nominal : \${price}\\n\` + \`\\nKirim Qris Bang!!!\`;
             const waUrl = \`https://wa.me/\${NO_WHATSAPP_ADMIN}?text=\${encodeURIComponent(text)}\`;
-            
-            // Buka link WhatsApp
             window.open(waUrl, '_blank');
         }
 
@@ -340,28 +359,36 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
             e.currentTarget.classList.add('active');
-            document.getElementById(id).classList.add('active');
+            const target = document.getElementById(id);
+            if(target) target.classList.add('active');
             writeTerminal(\`Navigating to \${id.toUpperCase()}...\`);
         }
 
-        function openModule(src) { document.getElementById('moduleImg').src = src; document.getElementById('previewModule').style.display = 'flex'; }
-        function closeModule() { document.getElementById('previewModule').style.display = 'none'; }
+        function openModule(src) { 
+            const img = document.getElementById('moduleImg');
+            const preview = document.getElementById('previewModule');
+            if(img && preview) { img.src = src; preview.style.display = 'flex'; }
+        }
+        function closeModule() { 
+            const preview = document.getElementById('previewModule');
+            if(preview) preview.style.display = 'none'; 
+        }
 
         function initHUD() {
             setInterval(() => {
-                const now = new Date();
-                document.getElementById('clock').innerText = now.toTimeString().split(' ')[0];
-                document.getElementById('ping-val').innerText = Math.floor(Math.random() * 15) + 5;
+                const clock = document.getElementById('clock');
+                const ping = document.getElementById('ping-val');
+                if(clock) clock.innerText = new Date().toTimeString().split(' ')[0];
+                if(ping) ping.innerText = Math.floor(Math.random() * 15) + 5;
             }, 1000);
-
             if (navigator.getBattery) {
                 navigator.getBattery().then(function(battery) {
-                    const update = () => document.getElementById('batt-level').innerText = Math.floor(battery.level * 100) + "%";
-                    update();
-                    battery.onlevelchange = update;
+                    const update = () => {
+                        const level = document.getElementById('batt-level');
+                        if(level) level.innerText = Math.floor(battery.level * 100) + "%";
+                    }
+                    update(); battery.onlevelchange = update;
                 });
-            } else {
-                document.getElementById('batt-level').innerText = "100%";
             }
         }
 
@@ -369,27 +396,20 @@
             const topNames = ["Fadil", "Rehan", "Eza"];
             const topPrices = ["120.000", "97.000", "87.000"];
             const lb = document.getElementById('leaderboard');
+            if(!lb) return;
             let content = '';
-            
             for(let i=0; i<3; i++) {
                 const rank = i + 1;
                 let badgeClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : 'rank-3';
                 let badgeIcon = rank === 1 ? '<i class="fas fa-crown"></i>' : rank === 2 ? '<i class="fas fa-medal"></i>' : '<i class="fas fa-award"></i>';
-
-                content += \`
-                <div class="top-buyer-block">
-                    <div class="lb-badge \${badgeClass}">\${badgeIcon}</div>
-                    <div style="display:flex; flex-direction:column;">
-                        <span class="lb-name">\${rank}.\${topNames[i]}</span>
-                        <span class="lb-val">Rp \${topPrices[i]}</span>
-                    </div>
-                </div>\`;
+                content += \`<div class="top-buyer-block"><div class="lb-badge \${badgeClass}">\${badgeIcon}</div><div style="display:flex; flex-direction:column;"><span class="lb-name">\${rank}.\${topNames[i]}</span><span class="lb-val">Rp \${topPrices[i]}</span></div></div>\`;
             }
             lb.innerHTML = content + content;
         }
 
-        const term = document.getElementById('terminal');
         function writeTerminal(msg) {
+            const term = document.getElementById('terminal');
+            if(!term) return;
             const line = document.createElement('div');
             line.innerHTML = \`<span style="color:#444;">[\${new Date().toLocaleTimeString()}]</span> > \${msg}\`;
             term.appendChild(line); term.scrollTop = term.scrollHeight;
@@ -404,49 +424,53 @@
         }
 
         function showFakePurchase() {
-            const items = ["Holo Senjata", "Holo Bundle", "Drag Headshot", "Magic Bullet"];
-            const users = ["Adit", "Budi", "Sahrul", "Dimas", "Rizky"];
-            const user = users[Math.floor(Math.random()*users.length)];
-            const item = items[Math.floor(Math.random()*items.length)];
-            
-            document.getElementById('notif-user').innerText = \`\${user}*** Berhasil Membeli\`;
-            document.getElementById('notif-item').innerText = \`\${item}\`;
-            
+            const items = ["Holo Senjata", "Holo Bundle", "Holo Smooth", "Drag Headshot", "Leher Headshot", "Dada Headshot", "Badan Headshot", "Perut Headshot", "Magic Bullet", "Magic Bullet", "Hapus Holo ss00", "Add Color Holo", "Change Color Holo", "Add Gambar Glowal", "Change Gambar Glowal"];
+            const users = ["Aris", "Dimas_FF", "Bang_Jago", "Rizkyy", "Sahrul_Gz", "Fery_Gans", "Adit_02", "Baim_NoLimit", "Eko_P", "Vinaa", 
+    "Putra_Riau", "Deni_S", "Agus_Gaming", "Kholik_Vip", "Zidan_X", "Rama_Ganz", "Yuda_Oky", "Irfan_Tzy", "Doni_K", "Satria_Z",
+    "Guntur_FF", "Lutfi_Ex", "Bayu_Skylark", "Rian_Spt", "Andika_P", "Galang_X", "Tio_Gaming", "Rafa_Bot", "Hadi_S", "Akbar_V",
+    "Gilang_ID", "Fajar_R", "Wahyu_D", "Angga_Y", "Yusuf_K", "Haikal_G", "Nanda_T", "Eza_Mod", "Rendi_B", "Yoga_A",
+    "Fadel_Z", "Zaki_R", "Ilham_M", "Bima_S", "Arya_T", "Nico_L", "Hendra_G", "Robby_C", "Indra_K", "Andi_S",
+    "Kevin_T", "Daffa_V", "Rafi_X", "Edo_S", "Aldi_N", "Reza_P", "Gani_M", "Udin_Vip", "Sholeh", "Riko_D",
+    "Mamat_G", "Ucup_C", "Asep_FF", "Cecep_Z", "Ujang_X", "Dadan_G", "Entis_S", "Tatung", "Engkus", "Asep_K",
+    "Samsul_H", "Ipin_V", "Upin_G", "Jarjit_X", "Mail_Z", "Ehzan_M", "Fizi_S", "Meimei", "Susanti", "Devi_C",
+    "Lia_G", "Putri_R", "Santi_V", "Dewi_X", "Siska_Z", "Mega_P", "Ayu_S", "Indah_G", "Sari_V", "Maya_Z",
+    "Kiki_M", "Nana_S", "Lala_G", "Tata_V", "Cici_X", "Mimi_Z", "Fifi_P", "Gigi_S", "Susu_G", "Dodo_V", "Gabriel", "Rionaldo", "Darome", "Izera", "Meirandha", "Tukangbas", "Icha", "Plenger Ah ah"];
             const n = document.getElementById('buyer-notif');
+            if(!n) return;
+            document.getElementById('notif-user').innerText = \`\${users[Math.floor(Math.random()*users.length)]}*** Berhasil Membeli\`;
+            document.getElementById('notif-item').innerText = \`\${items[Math.floor(Math.random()*items.length)]}\`;
             n.style.display = 'flex';
-            n.className = "animate__animated animate__bounceInUp";
-            
+            n.className = "animate__animated animate__fadeInDown";
             setTimeout(() => {
-                n.className = "animate__animated animate__fadeOutDown";
+                n.className = "animate__animated animate__fadeOutUp";
                 setTimeout(() => { n.style.display = 'none'; }, 500);
-            }, 4000);
+            }, 4500);
         }
 
         const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function initParticles() {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-            particles = [];
-            for(let i=0; i<20; i++) { particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: 0.2, vy: 0.2, s: 1 }); }
+        if(canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            function initParticles() {
+                canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+                for(let i=0; i<20; i++) { particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, vx: 0.2, vy: 0.2, s: 1 }); }
+            }
+            function animate() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = 'rgba(157,78,221,0.2)';
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy;
+                    if(p.x > canvas.width) p.x = 0;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            }
+            initParticles(); animate();
         }
-        function animate() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = 'rgba(157,78,221,0.2)';
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x > canvas.width) p.x = 0;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fill();
-            });
-            requestAnimationFrame(animate);
-        }
-        initParticles(); animate();
     <\/script>
 </body>
 </html>`;
 
-            // DECRYPTION MODULE (Browser-Only Runtime)
-            // Scraper VOID_REAPER gak bakal bisa baca 'document' dan 'write' sekaligus
             document.write(rawHTML);
         })();
     </script>
