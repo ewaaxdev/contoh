@@ -68,6 +68,7 @@
         @keyframes blinker { 50% { opacity: 0; } }
 
         #boot-phase {
+        overflow: hidden;
           margin-top: 6px;
           font-size: 12px;
           letter-spacing: 1.2px;
@@ -351,22 +352,38 @@ EWAAXDEV MODS
     <script>
         const NO_WHATSAPP_ADMIN = "6289653880942";
         const bootLogs = ["▰ ▱ ▱ ▱ ▱ ▱", "▱ ▰ ▱ ▱ ▱ ▱", "▱ ▱ ▰ ▱ ▱ ▱", "▱ ▱ ▱ ▰ ▱ ▱", "▱ ▱ ▱ ▱ ▰ ▱", "▱ ▱ ▱ ▱ ▱ ▰", "▰ ▱ ▱ ▱ ▱ ▱", "𝗠𝗢𝗛𝗢𝗡 𝗧𝗘𝗞𝗔𝗡 𝗧𝗢𝗠𝗕𝗢𝗟 𝗩𝗘𝗥𝗜𝗙𝗜𝗞𝗔𝗦𝗜"];
-        let logIdx = 7;
-        const logInt = setInterval(() => {
-            const statusBox = document.getElementById('boot-status');
-            if(statusBox && logIdx < bootLogs.length){
-                statusBox.innerText = bootLogs[logIdx];
-                logIdx++;
-            } else if(logIdx >= bootLogs.length) {
-                clearInterval(logInt);
-                const loader = document.getElementById('boot-loader');
-                const finger = document.getElementById('finger-print');
-                const btn = document.getElementById('access-btn');
+        let logIdx = 7; // DIMULAI DARI 0 SUPAYA JALAN
+    
+    const logInt = setInterval(() => {
+        const statusBox = document.getElementById('boot-status');
+        const loader = document.getElementById('boot-loader');
+        const finger = document.getElementById('finger-print');
+        const btn = document.getElementById('access-btn');
+
+        if(statusBox && logIdx < bootLogs.length){
+            // Update teks log
+            statusBox.innerText = bootLogs[logIdx];
+            logIdx++;
+            
+            // Jika mencapai teks terakhir (Verifikasi)
+            if(logIdx === bootLogs.length) {
+                clearInterval(logInt); // BERHENTI DI SINI
+                
+                // Transisi halus: Hilangkan chip, munculkan sidik jari
                 if(loader) loader.style.display = 'none';
                 if(finger) finger.style.display = 'block';
-                if(btn) { btn.style.background = 'var(--primary)'; btn.style.color = '#fff'; btn.innerText = 'VERIFY NOW!'; btn.disabled = false; }
+                
+                // Aktifkan tombol
+                if(btn) { 
+                    btn.style.background = 'var(--primary)'; 
+                    btn.style.color = '#fff'; 
+                    btn.style.boxShadow = '0 0 15px var(--primary)';
+                    btn.innerText = 'VERIFY NOW!'; 
+                    btn.disabled = false; 
+                }
             }
-        }, 600);
+        }
+    }, 600);
 
         function startSystem() {
             const boot = document.getElementById('bootModule');
@@ -425,7 +442,7 @@ EWAAXDEV MODS
 
         function initLeaderboard() {
             const topNames = ["Fadil", "Rehan", "Eza"];
-            const topPrices = ["120.000", "97.000", "87.000"];
+            const topPrices = ["150.000", "93.840", "87.020"];
             const lb = document.getElementById('leaderboard');
             if(!lb) return;
             let content = '';
@@ -455,7 +472,7 @@ EWAAXDEV MODS
         }
 
         function showFakePurchase() {
-            const items = ["Holo Senjata", "Holo Bundle", "Holo Smooth", "Drag Headshot", "Leher Headshot", "Dada Headshot", "Badan Headshot", "Perut Headshot", "Magic Bullet", "Magic Bullet", "Hapus Holo ss00", "Add Color Holo", "Change Color Holo", "Add Gambar Glowal", "Change Gambar Glowal"];
+            const items = ["Holo Senjata", "Holo Bundle", "Holo Smooth", "Drag Headshot", "Leher Headshot", "Dada Headshot", "Badan Headshot", "Holo Antena", "Magic Bullet", "Magic Bullet", "Hapus Holo ss00", "Add Color Holo", "Change Color Holo", "Add Gambar Glowal", "Change Gambar Glowal"];
             const users = ["Aris", "Dimas_FF", "Bang_Jago", "Rizkyy", "Sahrul_Gz", "Fery_Gans", "Adit_02", "Baim_NoLimit", "Eko_P", "Vinaa", 
     "Putra_Riau", "Deni_S", "Agus_Gaming", "Kholik_Vip", "Zidan_X", "Rama_Ganz", "Yuda_Oky", "Irfan_Tzy", "Doni_K", "Satria_Z",
     "Guntur_FF", "Lutfi_Ex", "Bayu_Skylark", "Rian_Spt", "Andika_P", "Galang_X", "Tio_Gaming", "Rafa_Bot", "Hadi_S", "Akbar_V",
@@ -468,15 +485,15 @@ EWAAXDEV MODS
     "Kiki_M", "Nana_S", "Lala_G", "Tata_V", "Cici_X", "Mimi_Z", "Fifi_P", "Gigi_S", "Susu_G", "Dodo_V", "Gabriel", "Rionaldo", "Darome", "Izera", "Meirandha", "Tukangbas", "Icha", "Plenger Ah ah"];
             const n = document.getElementById('buyer-notif');
             if(!n) return;
-            document.getElementById('notif-user').innerText = \`\${users[Math.floor(Math.random()*users.length)]}*** Berhasil Membeli\`;
+            document.getElementById('notif-user').innerText = \`\${users[Math.floor(Math.random()*users.length)]}** Membeli\`;
             document.getElementById('notif-item').innerText = \`\${items[Math.floor(Math.random()*items.length)]}\`;
             n.style.display = 'flex';
             n.className = "animate__animated animate__fadeInDown";
             setTimeout(() => {
                 n.className = "animate__animated animate__fadeOutUp";
-                setTimeout(() => { n.style.display = 'none'; }, 500);
-            }, 4500);
-        }
+                setTimeout(() => { n.style.display = 'none'; }, 1500);
+            }, 3000);
+}
 
         const canvas = document.getElementById('particles');
         if(canvas) {
