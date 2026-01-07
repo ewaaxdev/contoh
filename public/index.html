@@ -409,7 +409,7 @@ EWAAXDEV PROJECTS
 
         function processOrder(item, price) {
             writeTerminal(\`Redirecting to WhatsApp for order: \${item}...\`);
-            const text = \`Bang Ewaa, mau dong Order 🛒\\n\` + \`📦 Barang : \${item}\\n\` + \`💵 Nominal : \${price}\\n\` + \`\\nKirim Qris Bang!!!\`;
+            const text = \`> ᴀᴅᴍɪɴ ᴍᴀᴜ ᴅᴏɴɢ ᴏʀᴅᴇʀ♻️\\n\` + \`ɪᴛᴇᴍ [📦] : \${item}\\n\` + \`ᴘʀɪᴄᴇ [💵] : \${price}\\n\` + \`\\nᴋɪʀɪᴍ ǫʀɪs ɴʏᴀ ᴅᴏɴɢ ᴍɪɴ✌🏻\`;
             const waUrl = \`https://wa.me/\${NO_WHATSAPP_ADMIN}?text=\${encodeURIComponent(text)}\`;
             window.open(waUrl, '_blank');
         }
